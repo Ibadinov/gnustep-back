@@ -523,6 +523,8 @@ BUILD_GRAPHICS=cairo
 case $target_os in
   *mingw32* ) BUILD_SERVER=win32
               BUILD_GRAPHICS=winlib;;
+# Cairo is linked to Apple's CoreFoundation on OSX, do not build it by default
+  darwin* )   BUILD_GRAPHICS=xlib;;
 esac
 
 AC_ARG_ENABLE(server, 
@@ -638,7 +640,8 @@ elif test x"$BUILD_GRAPHICS" = "xart"; then
     CPPFLAGS="$LIBART_CFLAGS $FREETYPE_CFLAGS $CPPFLAGS"
   fi
 elif test x"$BUILD_GRAPHICS" = "xxlib"; then
- : # Nothing to do
+  LIBS="$FREETYPE_LIBS $FONTCONFIG_LIBS $LIBS"
+  CPPFLAGS="$FREETYPE_CFLAGS $FONTCONFIG_CFLAGS $CPPFLAGS"
 elif test x"$BUILD_GRAPHICS" = "xwinlib"; then
  : # Nothing to do
 else
