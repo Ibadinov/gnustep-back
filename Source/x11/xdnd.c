@@ -40,13 +40,7 @@
 #ifdef DND_DEBUG
 #define dnd_debug(a,b...) printf("%s: %d: " a "\n", __FILE__, __LINE__ , ## b)
 #else
-
-#ifdef NeXT_RUNTIME
-#define dnd_debug //
-#else  /* !NeXT_RUNTIME */
 #define dnd_debug(a,b...)
-#endif /* NeXT_RUNTIME */
-
 #endif
 
 

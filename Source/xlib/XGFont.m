@@ -377,7 +377,7 @@ static BOOL XGInitAtoms(Display *dpy)
 	&& (mostCompatibleStringEncoding != NSUnicodeStringEncoding))
         {
 	  // FIXME: This only works for 8-Bit characters
-	  unsigned int  size = 1;
+	  NSUInteger  size = 1;
 	  unsigned char c = 0;
 	  unsigned char *dst = &c;
 	  unichar ch = glyph;

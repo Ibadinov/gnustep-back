@@ -654,12 +654,12 @@ static int bezierpath_cubic_to(const FT_Vector *c1, const FT_Vector *c2,
 }
 
 static FT_Outline_Funcs bezierpath_funcs = {
-  move_to: bezierpath_move_to,
-  line_to: bezierpath_line_to,
-  conic_to: bezierpath_conic_to,
-  cubic_to: bezierpath_cubic_to,
-  shift: 10,
-//  delta: 0,
+  .move_to = bezierpath_move_to,
+  .line_to = bezierpath_line_to,
+  .conic_to = bezierpath_conic_to,
+  .cubic_to = bezierpath_cubic_to,
+  .shift = 10,
+//  .delta = 0,
 };
 
 - (void) appendBezierPathWithGlyphs: (NSGlyph *)glyphs
