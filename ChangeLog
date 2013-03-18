@@ -1,3 +1,80 @@
+2012-03-01  Richard Frith-Macdonald <rfm@gnu.org>
+
+        * Version ... bump subminor number in preparation for next release.
+
+2012-03-01  Richard Frith-Macdonald <rfm@gnu.org>
+
+        Make release
+        * Version 0.23.0
+        * Update release notes
+
+2013-02-18  Fred Kiefer <FredKiefer@gmx.de>
+
+	* Source/x11/XGServerWindow.m
+	Fix compiler warnings reported by
+	Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+
+2013-02-16  Fred Kiefer <FredKiefer@gmx.de>
+
+	* Source/gsc/GSContext.m
+	* Source/x11/XGServerWindow.m
+	Adopt to changes in gui.
+
+2013-02-10  Fred Kiefer <FredKiefer@gmx.de>
+
+	* Headers/cairo/CairoGState.h
+	* Source/cairo/CairoGState.m
+	* Source/cairo/XGCairoXImageSurface.m
+	* Source/gsc/GSContext.m
+	* Source/gsc/GSStreamContext.m
+	* Source/gsc/GSStreamGState.m
+	* Source/x11/XGServerWindow.m
+	* Source/x11/XGDragView.m:
+	Silence warnings from clang.
+
+2013-02-01  Fred Kiefer <FredKiefer@gmx.de>
+
+	* Source/winlib/WIN32Context.m(-isCompatibleBitmap): Add
+	missing varible.
+
+2013-02-01  Fred Kiefer <FredKiefer@gmx.de>
+
+	* Headers/gsc/GSGState.h
+	* Headers/gsc/GSGStateOps.h
+	* Headers/gsc/GSStreamGState.h
+	* Source/art/ARTGState.m
+	* Source/art/composite.m
+	* Source/art/ftfont-old.m
+	* Source/art/ftfont.h
+	* Source/art/ftfont.m
+	* Source/art/path.m
+	* Source/cairo/CairoGState.m
+	* Source/gsc/GSContext.m
+	* Source/gsc/GSGState.m
+	* Source/gsc/GSStreamContext.m
+	* Source/winlib/WIN32GState.m
+	* Source/xlib/XGGState.m: Adopt to CGFloat changes in DPS/PS
+	functions of gui.
+
+2013-02-01  Fred Kiefer <FredKiefer@gmx.de>
+
+	* Source/cairo/CairoGState.m
+	* Source/gsc/GSGState.m
+	* Source/gsc/GSStreamContext.m
+	* Source/winlib/WIN32GState.m: Adopt to CGFloat changes on NSBezierPath.
+
+2013-01-27  Fred Kiefer  <FredKiefer@gmx.de>
+
+	* Source/gsc/GSContext.m
+	* Source/cairo/CairoContext.m
+	* Source/art/ARTContext.m
+	* Source/xlib/XGContext.m
+	* Source/winlib/WIN32Context.m: Move the bitmap conversion
+	code from cairo to the gsc class. Add a new method to detect
+	incompatible image formats and implement that for all backends.
+	* Source/winlib/WIN32GState.m (GSCreateBitmap): Improve the
+	handling of device black/white colour space.
+
 2013-01-11  Fred Kiefer  <FredKiefer@gmx.de>
 
 	* Source/win32/w32_general.m (-decodeWM_CLOSEParams:::): Post the
