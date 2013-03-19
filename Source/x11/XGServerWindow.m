@@ -99,14 +99,14 @@ static int		last_win_num = 0;
 @end
 
 @interface NSBitmapImageRep (GSPrivate)
-- (NSBitmapImageRep *) _convertToFormatBitsPerSample: (int)bps
-                                     samplesPerPixel: (int)spp
+- (NSBitmapImageRep *) _convertToFormatBitsPerSample: (NSInteger)bps
+                                     samplesPerPixel: (NSInteger)spp
                                             hasAlpha: (BOOL)alpha
                                             isPlanar: (BOOL)isPlanar
                                       colorSpaceName: (NSString*)colorSpaceName
                                         bitmapFormat: (NSBitmapFormat)bitmapFormat 
-                                         bytesPerRow: (int)rowBytes
-                                        bitsPerPixel: (int)pixelBits;
+                                         bytesPerRow: (NSInteger)rowBytes
+                                        bitsPerPixel: (NSInteger)pixelBits;
 @end
 
 static NSBitmapImageRep *getStandardBitmap(NSImage *image)
@@ -1345,9 +1345,19 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   window->visibility = -1;
   window->wm_state = NormalState;
   if (window->ident)
-    XGetGeometry(dpy, window->ident, &window->root, 
-		 &x, &y, &width, &height,
-		 &window->border, &window->depth);
+    {
+      XGetGeometry(dpy, window->ident, &window->root, 
+                   &x, &y, &width, &height,
+                   &window->border, &window->depth);
+    }
+  else
+    {
+      NSLog(@"Failed to get root window");
+      x = 0;
+      y = 0;
+      width = 0;
+      height = 0;
+    }
 
   window->xframe = NSMakeRect(x, y, width, height);
   NSMapInsert (windowtags, (void*)(uintptr_t)window->number, window);
@@ -1960,7 +1970,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   XClassHint		classhint;
   RContext              *context;
 
-  NSDebugLLog(@"XGTrace", @"DPSwindow: %@ %d", NSStringFromRect(frame), type);
+  NSDebugLLog(@"XGTrace", @"DPSwindow: %@ %d", NSStringFromRect(frame), (int)type);
   root = [self _rootWindowForScreen: screen];
   context = [self xrContextForScreen: screen];
 
@@ -2526,7 +2536,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
   if (!window)
     return;
 
-  NSDebugLLog(@"XGTrace", @"DPSwindowbacking: %@ : %d", type, win);
+  NSDebugLLog(@"XGTrace", @"DPSwindowbacking: %d : %d", (int)type, win);
 
   if ((window->gdriverProtocol & GDriverHandlesBacking))
     {
@@ -3908,7 +3918,7 @@ static BOOL didCreatePixmaps;
 }
 
 /** Sets the transparancy value for the whole window */
-- (void) setalpha: (float)alpha: (int) win
+- (void) setalpha: (float)alpha : (int) win
 {
   gswindow_device_t *window = WINDOW_WITH_TAG(win);
   static Atom opacity_atom = None;
