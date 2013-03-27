@@ -391,7 +391,7 @@ Ones(unsigned int n)
   return extents.width;
 }
 
-- (CGFloat) widthOfGlyphs: (const NSGlyph *) glyphs length: (int) len
+- (CGFloat) widthOfGlyphs: (const NSGlyph *) glyphs length: (NSUInteger) len
 {
   XGlyphInfo extents;
   XftChar16 buf[len];
@@ -405,7 +405,7 @@ Ones(unsigned int n)
   XftTextExtents16 ([XGServer currentXDisplay],
 		    font_info,
 		    buf,
-		    len,
+		    (int)len,
 		    &extents);
 
   return extents.width;
@@ -503,7 +503,7 @@ Ones(unsigned int n)
 		  xp.x, xp.y, (XftChar16*)cstr, (int)length);
 }
 
-- (void) drawGlyphs: (const NSGlyph *) glyphs length: (int) len
+- (void) drawGlyphs: (const NSGlyph *) glyphs length: (NSUInteger) len
 	  onDisplay: (Display*) xdpy drawable: (Drawable) draw
 	       with: (GC) xgcntxt at: (XPoint) xp
 {
@@ -520,7 +520,7 @@ Ones(unsigned int n)
 
   /* do it */
   XftDrawString16(xftdraw, &xftcolor, font_info, 
-		  xp.x, xp.y, (XftChar16*)buf, len);
+		  xp.x, xp.y, (XftChar16*)buf, (int)len);
 }
 
 - (void) draw: (const char*) s length: (int) len 
