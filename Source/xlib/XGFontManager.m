@@ -52,7 +52,7 @@
 static NSMutableDictionary* creationDictionary;
 
 // Fills in the size into an creation string to make it an X font name
-NSString *XGXFontName(NSString *fontName, float size)
+NSString *XGXFontName(NSString *fontName, CGFloat size)
 {
   NSString *creationName = [creationDictionary objectForKey: fontName];
 

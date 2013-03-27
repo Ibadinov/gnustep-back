@@ -85,14 +85,14 @@ typedef struct _gswindow_device_t {
   Window                ident;         /* Window handle */
   Window                root;          /* Handle of root window */
   Window		parent;        /* Handle of parent window */
-  int                   screen;        /* Screeen this window is on */
+  NSInteger             screen;        /* Screeen this window is on */
   GC                    gc;            /* GC for drawing */
   long                  number;        /* Globally unique identifier */
   unsigned int          depth;         /* Window depth */
   unsigned int          border;        /* Border size */
   int			map_state;     /* X map state */
   int                   visibility;    /* X visibility */
-  int                   wm_state;      /* X WM state */
+  NSInteger             wm_state;      /* X WM state */
   NSBackingStoreType    type;          /* Backing type */
   NSRect                xframe;        /* Window frame */
 
@@ -118,8 +118,8 @@ typedef struct _gswindow_device_t {
   int                   gdriverProtocol; /* Managed by gdriver */
   BOOL			ignore_take_focus;
 #ifdef HAVE_LIBXEXT
-  uint32_t              net_wm_sync_request_counter_value_low;
-  uint32_t              net_wm_sync_request_counter_value_high;
+  Atom                  net_wm_sync_request_counter_value_low;
+  Atom                  net_wm_sync_request_counter_value_high;
   XSyncCounter          net_wm_sync_request_counter;
 #endif
 } gswindow_device_t;
@@ -129,20 +129,20 @@ typedef struct _gswindow_device_t {
 @interface XGServer (DPSWindow)
 + (gswindow_device_t *) _windowForXWindow: (Window)xWindow;
 + (gswindow_device_t *) _windowForXParent: (Window)xWindow;
-+ (gswindow_device_t *) _windowWithTag: (int)windowNumber;
-- (void) _addExposedRectangle: (XRectangle)rectangle : (int)win : (BOOL) ignoreBacking;
-- (void) _processExposedRectangles: (int)win;
++ (gswindow_device_t *) _windowWithTag: (NSInteger)windowNumber;
+- (void) _addExposedRectangle: (XRectangle)rectangle : (NSInteger)win : (BOOL) ignoreBacking;
+- (void) _processExposedRectangles: (NSInteger)win;
 - (void) _initializeCursorForXWindow: (Window) win;
 - (void) _destroyServerWindows;
 
 /* This needs to go in GSDisplayServer */
 - (void) _DPSsetcursor: (Cursor)c : (BOOL)set;
 
-- (int) _wm_state: (Window) win;
+- (NSInteger) _wm_state: (Window) win;
 - (BOOL) _ewmh_isHidden: (Window) win;
 @end
 
 extern Pixmap
 xgps_cursor_mask(Display *xdpy, Drawable draw, const unsigned char *data,
-		 int w, int h, int colors);
+		 NSInteger w, NSInteger h, NSInteger colors);
 #endif

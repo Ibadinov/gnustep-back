@@ -45,7 +45,7 @@
 
 
 
-void
+static void
 xdnd_reset(DndClass * dnd)
 {
   dnd->stage = XDND_DROP_STAGE_IDLE;
@@ -116,7 +116,7 @@ xdnd_set_dnd_aware (DndClass * dnd, Window window, Atom * typelist)
 }
 
 int
-xdnd_is_dnd_aware(DndClass *dnd, Window window, int *version, Atom *typelist)
+xdnd_is_dnd_aware(DndClass *dnd, Window window, Atom *version, Atom *typelist)
 {
   Atom actual;
   int format;
@@ -323,7 +323,7 @@ xdnd_set_selection_owner(DndClass * dnd, Window window, Atom type)
 
 void
 xdnd_selection_send(DndClass * dnd, XSelectionRequestEvent * request, 
-  unsigned char *data, int length)
+                    unsigned char *data, long length)
 {
   XEvent xevent;
 
@@ -332,7 +332,7 @@ xdnd_selection_send(DndClass * dnd, XSelectionRequestEvent * request,
   dnd_debug (" length = %d", length);
 
   XChangeProperty (dnd->display, request->requestor, request->property,
-    request->target, 8, PropModeReplace, data, length);
+    request->target, 8, PropModeReplace, data, (int)length);
 
   xevent.xselection.type = SelectionNotify;
   xevent.xselection.property = request->property;

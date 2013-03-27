@@ -91,6 +91,7 @@ static BOOL _mod_ignore_shift = NO;
 
 static BOOL next_event_is_a_keyrepeat;
 
+void __objc_xgcontextevent_linking (void);
 void __objc_xgcontextevent_linking (void)
 {
 }
@@ -120,6 +121,8 @@ static void (*procEvent)(id, SEL, XEvent*) = 0;
 @end
 
 
+extern int
+XGErrorHandler(Display *display, XErrorEvent *err);
 int
 XGErrorHandler(Display *display, XErrorEvent *err)
 {
@@ -158,8 +161,8 @@ static int check_modifier (XEvent *xEvent, KeySym key_sym)
 }
 
 @interface XGServer (WindowOps)
-- (void) styleoffsets: (float *) l : (float *) r : (float *) t : (float *) b
-                     : (unsigned int) style : (Window) win;
+- (void) styleoffsets: (CGFloat *) l : (CGFloat *) r : (CGFloat *) t : (CGFloat *) b
+                     : (NSUInteger) style : (Window) win;
 - (NSRect) _XWinRectToOSWinRect: (NSRect)r for: (void*)windowNumber;
 @end
 
@@ -316,15 +319,15 @@ posixFileDescriptor: (NSPosixFileDescriptor*)fileDescriptor
 - (NSPoint) _XPointToOSPoint: (NSPoint)x for: (void*)window
 {
   gswindow_device_t *win = (gswindow_device_t*)window;
-  unsigned int style = win->win_attrs.window_style;
+  unsigned long style = win->win_attrs.window_style;
   NSPoint o;
-  float t, b, l, r;
+  CGFloat t, b, l, r;
 
   [self styleoffsets: &l : &r : &t : &b : style : win->ident];
   o.x = x.x + l;
   o.y = NSHeight(win->xframe) - x.y + b;
 
-  NSDebugLLog(@"Frame", @"X2OP %lu, %x, %@, %@", win->number, style,
+  NSDebugLLog(@"Frame", @"X2OP %ld, %lx, %@, %@", (long)win->number, (long)style,
     NSStringFromPoint(x), NSStringFromPoint(o));
   return o;
 }
@@ -1431,7 +1434,7 @@ posixFileDescriptor: (NSPosixFileDescriptor*)fileDescriptor
 	      }
 	    if (cWin != 0)
 	      {
-		int new_state;
+		NSInteger new_state;
 
 		/* Get the new window state */
 		if (xEvent.xproperty.state == PropertyNewValue)
@@ -1760,13 +1763,13 @@ posixFileDescriptor: (NSPosixFileDescriptor*)fileDescriptor
 - (NSEvent *)_handleTakeFocusAtom: (XEvent)xEvent 
                        forContext: (NSGraphicsContext *)gcontext
 {
-  int key_num;
+  NSInteger key_num;
   NSWindow *key_win;
   NSEvent *e = nil;
   key_win = [NSApp keyWindow];
   key_num = [key_win windowNumber];
-  NSDebugLLog(@"Focus", @"take focus:%lu (current=%lu key=%d)",
-              cWin->number, generic.currentFocusWindow, key_num);
+  NSDebugLLog(@"Focus", @"take focus:%lu (current=%lu key=%ld)",
+              cWin->number, generic.currentFocusWindow, (long)key_num);
 
   /* Sometimes window managers lose the setinputfocus on the key window
    * e.g. when ordering out a window with focus then ordering in the key window.   
@@ -1811,7 +1814,7 @@ posixFileDescriptor: (NSPosixFileDescriptor*)fileDescriptor
          to become key, so it tells the main menu (typically the first
          menu in the list), but since we already have a window that
          was key before, use that instead */
-      NSDebugLLog(@"Focus", @"Key window is already %d", key_num);
+      NSDebugLLog(@"Focus", @"Key window is already %ld", (long)key_num);
       [GSServerForWindow(key_win) setinputfocus: key_num];
     }
   else
@@ -2496,7 +2499,7 @@ process_modifier_flags(unsigned int state)
   return [self mouseLocationOnScreen: defScreen window: NULL];
 }
 
-- (NSPoint) mouseLocationOnScreen: (int)screen window: (int *)win
+- (NSPoint) mouseLocationOnScreen: (NSInteger)screen window: (NSInteger *)win;
 {
   Window rootWin;
   Window childWin;
@@ -2508,7 +2511,7 @@ process_modifier_flags(unsigned int state)
   BOOL ok;
   NSPoint p;
   int height;
-  int screen_number;
+  NSInteger screen_number;
   
   screen_number = (screen >= 0) ? screen : defScreen;
   ok = XQueryPointer (dpy, [self xDisplayRootWindowForScreen: screen_number],

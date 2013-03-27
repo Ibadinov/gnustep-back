@@ -297,7 +297,7 @@ RCombineImagesWithOpaqueness(RImage *image, RImage *src, int opaqueness)
 #undef COP
 }
 
-int
+static int
 calculateCombineArea(RImage *des, RImage *src, int *sx, int *sy,
                      unsigned *swidth, unsigned *sheight, int *dx, int *dy)
 {

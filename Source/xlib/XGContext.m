@@ -147,7 +147,7 @@
 - (BOOL) isCompatibleBitmap: (NSBitmapImageRep*)bitmap
 {
   NSString *colorSpaceName;
-  int numColors;
+  NSInteger numColors;
 
   if ([bitmap bitmapFormat] != 0)
     {

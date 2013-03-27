@@ -2099,8 +2099,8 @@ LRESULT CALLBACK windowEnumCallback(HWND hwnd, LPARAM lParam)
     }
 }
 
-- (void) styleoffsets: (float *) l : (float *) r : (float *) t : (float *) b
-		     : (unsigned int) style 
+- (void) styleoffsets: (CGFloat *) l : (CGFloat *) r : (CGFloat *) t : (CGFloat *) b
+		     : (NSUInteger) style 
 {
   if ([self handlesWindowDecorations])
     {

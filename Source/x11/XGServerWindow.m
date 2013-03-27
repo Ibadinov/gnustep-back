@@ -93,6 +93,11 @@ static NSMapTable *windowtags = NULL;
 /* Track used window numbers */
 static int		last_win_num = 0;
 
+#if !HAVE_XCURSOR
+static Pixmap
+xgps_cursor_image(Display *xdpy, Drawable draw, const unsigned char *data, 
+		  NSInteger w, NSInteger h, NSInteger colors, XColor *fg, XColor *bg);
+#endif
 
 @interface NSCursor (BackendPrivate)
 - (void *)_cid;
@@ -152,7 +157,7 @@ static NSBitmapImageRep *getStandardBitmap(NSImage *image)
     }
 }
 
-
+void __objc_xgcontextwindow_linking (void);
 void __objc_xgcontextwindow_linking (void)
 {
 }
@@ -162,14 +167,14 @@ void __objc_xgcontextwindow_linking (void)
  */
 static unsigned char*
 PropGetCheckProperty(Display *dpy, Window window, Atom hint, Atom type,
-		     int format, int count, int *retCount)
+		     NSInteger format, NSInteger count, NSUInteger *retCount)
 {
   Atom type_ret;
   int fmt_ret;
   unsigned long nitems_ret;
   unsigned long bytes_after_ret;
   unsigned char *data;
-  int tmp;
+  NSInteger tmp;
 
   if (count <= 0)
     tmp = 0xffffff;
@@ -219,7 +224,7 @@ setNormalHints(Display *d, gswindow_device_t *w)
       /* Some silly window managers (*cough* metacity *cough*) ignore
 	 our "non-resizable" hints unless we set the min and max
 	 sizes equal to the current size, hence the ugly code here.  */
-      CARD32 oldFlags;
+      long oldFlags;
       int old_w0, old_h0, old_w1, old_h1;
       
       old_w0 = w->siz_hints.min_width;
@@ -301,8 +306,7 @@ typedef struct {
  * window hints.  This makes an X call, please make sure you do it
  * only once.
  */
-static void setWindowHintsForStyle (Display *dpy, Window window, 
-				 unsigned int styleMask)
+static void setWindowHintsForStyle (Display *dpy, Window window, NSUInteger styleMask)
 {
   MwmHints *hints;
   BOOL needToFreeHints = YES;
@@ -428,9 +432,9 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
 @end
 
 @interface XGServer (WindowOps)
-- (gswindow_device_t *) _rootWindowForScreen: (int)screen;
-- (void) styleoffsets: (float *) l : (float *) r : (float *) t : (float *) b
-                     : (unsigned int) style : (Window) win;
+- (gswindow_device_t *) _rootWindowForScreen: (NSInteger)screen;
+- (void) styleoffsets: (CGFloat *) l : (CGFloat *) r : (CGFloat *) t : (CGFloat *) b
+                     : (NSUInteger) style : (Window) win;
 - (void) _setSupportedWMProtocols: (gswindow_device_t *) window;
 @end
 
@@ -483,9 +487,9 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
 - (NSRect) _OSFrameToXFrame: (NSRect)o for: (void*)window
 {
   gswindow_device_t	*win = (gswindow_device_t*)window;
-  unsigned int		style = win->win_attrs.window_style;
+  unsigned long		style = win->win_attrs.window_style;
   NSRect	x;
-  float	t, b, l, r;
+  CGFloat	t, b, l, r;
 
   [self styleoffsets: &l : &r : &t : &b : style : win->ident];
 
@@ -494,7 +498,7 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
   x.origin.x = o.origin.x + l;
   x.origin.y = o.origin.y + o.size.height - t;
   x.origin.y = DisplayHeight(dpy, win->screen) - x.origin.y;
-  NSDebugLLog(@"Frame", @"O2X %lu, %x, %@, %@", win->number, style,
+  NSDebugLLog(@"Frame", @"O2X %ld, %lx, %@, %@", (long)win->number, (long)style,
     NSStringFromRect(o), NSStringFromRect(x));
   return x;
 }
@@ -508,9 +512,9 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
 - (NSRect) _OSFrameToXHints: (NSRect)o for: (void*)window
 {
   gswindow_device_t	*win = (gswindow_device_t*)window;
-  unsigned int		style = win->win_attrs.window_style;
+  unsigned long		style = win->win_attrs.window_style;
   NSRect	x;
-  float	t, b, l, r;
+  CGFloat	t, b, l, r;
 
   [self styleoffsets: &l : &r : &t : &b : style : win->ident];
 
@@ -519,7 +523,7 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
   x.origin.x = o.origin.x;
   x.origin.y = o.origin.y + o.size.height;
   x.origin.y = DisplayHeight(dpy, win->screen) - x.origin.y;
-  NSDebugLLog(@"Frame", @"O2H %lu, %x, %@, %@", win->number, style,
+  NSDebugLLog(@"Frame", @"O2H %ld, %lx, %@, %@", (long)win->number, (long)style,
     NSStringFromRect(o), NSStringFromRect(x));
   return x;
 }
@@ -531,9 +535,9 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
 - (NSRect) _XWinRectToOSWinRect: (NSRect)x for: (void*)window
 {
   gswindow_device_t	*win = (gswindow_device_t*)window;
-  unsigned int		style = win->win_attrs.window_style;
+  unsigned long		style = win->win_attrs.window_style;
   NSRect	o;
-  float	t, b, l, r;
+  CGFloat	t, b, l, r;
 
   [self styleoffsets: &l : &r : &t : &b : style : win->ident];
   o.size.width = x.size.width;
@@ -554,9 +558,9 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
 - (NSRect) _XFrameToOSFrame: (NSRect)x for: (void*)window
 {
   gswindow_device_t	*win = (gswindow_device_t*)window;
-  unsigned int		style = win->win_attrs.window_style;
+  unsigned long		style = win->win_attrs.window_style;
   NSRect	o;
-  float	t, b, l, r;
+  CGFloat	t, b, l, r;
 
   [self styleoffsets: &l : &r : &t : &b : style : win->ident];
   o = x;
@@ -566,7 +570,7 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
   o.size.width += l + r;
   o.size.height += t + b;
 
-  NSDebugLLog(@"Frame", @"X2O %lu, %x, %@, %@", win->number, style,
+  NSDebugLLog(@"Frame", @"X2O %ld, %lx, %@, %@", (long)win->number, (long)style,
     NSStringFromRect(x), NSStringFromRect(o));
   return o;
 }
@@ -578,9 +582,9 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
 - (NSRect) _XFrameToXHints: (NSRect)o for: (void*)window
 {
   gswindow_device_t	*win = (gswindow_device_t*)window;
-  unsigned int		style = win->win_attrs.window_style;
+  unsigned long		style = win->win_attrs.window_style;
   NSRect	x;
-  float	t, b, l, r;
+  CGFloat	t, b, l, r;
 
   [self styleoffsets: &l : &r : &t : &b : style : win->ident];
 
@@ -592,7 +596,7 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
   x.size.height = o.size.height;
   x.origin.x = o.origin.x - l;
   x.origin.y = o.origin.y - t;
-  NSDebugLLog(@"Frame", @"X2H %lu, %x, %@, %@", win->number, style,
+  NSDebugLLog(@"Frame", @"X2H %ld, %lx, %@, %@", (long)win->number, (long)style,
     NSStringFromRect(o), NSStringFromRect(x));
   return x;
 }
@@ -628,7 +632,7 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
 - (BOOL) _checkWMSupports: (Atom)feature
 {
   Window root;
-  int	count;
+  NSUInteger count;
   Atom *data;
   Atom supported;
 
@@ -658,7 +662,7 @@ static void setWindowHintsForStyle (Display *dpy, Window window,
   return NO;
 }
 
-Bool
+static Bool
 _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
 {
 	XID *data = (XID*)arg;
@@ -736,7 +740,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   return NO;
 }
 
-- (BOOL) _checkStyle: (unsigned)style
+- (BOOL) _checkStyle: (NSUInteger)style
 {
   gswindow_device_t	*window;
   gswindow_device_t	*root;
@@ -746,16 +750,16 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   XClassHint		classhint;
   RContext              *context;
   XEvent		xEvent;
-  int			count;
+  NSUInteger            count;
   unsigned long		*extents;
   Offsets		*o = generic.offsets + (style & 15);
-  int			repp = 0;
+  Window                repp = 0;
   int			repx = 0;
   int			repy = 0;
   BOOL                  onScreen;
   BOOL                  reparented = NO;
 
-  NSDebugLLog(@"Offset", @"Checking offsets for style %d\n", style);
+  NSDebugLLog(@"Offset", @"Checking offsets for style %ld\n", (long)style);
 
   onScreen = [[NSUserDefaults standardUserDefaults] boolForKey:
     @"GSBackChecksOffsetsOnScreen"];
@@ -1114,8 +1118,8 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
           o->b = b;
           o->known = YES;
           NSDebugLLog(@"Offset",
-                      @"Style %d lrtb set to %d,%d,%d,%d\n",
-                      style, (int)o->l, (int)o->r, (int)o->t, (int)o->b);
+                      @"Style %ld lrtb set to %d,%d,%d,%d\n",
+                      (long)style, (int)o->l, (int)o->r, (int)o->t, (int)o->b);
         }
     }
 
@@ -1133,7 +1137,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
     }
   if (o->known == NO)
     {
-      NSLog(@"Failed to determine offsets for style %d", style);
+      NSLog(@"Failed to determine offsets for style %lu", (unsigned long)style);
       return NO;
     }
   return YES;
@@ -1146,7 +1150,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   Window *win;
   Atom	*data;
   Atom	atom;
-  int	count;
+  NSUInteger count;
 
   root = DefaultRootWindow(dpy);
   wmflags = XGWM_UNKNOWN;
@@ -1321,7 +1325,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   return wmflags;
 }
 
-- (gswindow_device_t *) _rootWindowForScreen: (int)screen
+- (gswindow_device_t *) _rootWindowForScreen: (NSInteger)screen
 {
   int x, y;
   unsigned int width, height;
@@ -1496,8 +1500,8 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
 {
   NSProcessInfo		*pInfo = [NSProcessInfo processInfo];
   NSArray		*args;
-  unsigned int		i;
-  unsigned int		argc;
+  NSUInteger		i;
+  NSUInteger		argc;
   char			**argv;
   XClassHint		classhint; 
   XTextProperty		windowName;
@@ -1635,7 +1639,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
     {
       argv[i] = (char*)[[args objectAtIndex: i] UTF8String];
     }
-  XSetCommand(dpy, ROOT, argv, argc);
+  XSetCommand(dpy, ROOT, argv, (int)argc);
   free(argv);
 
   // Store the host name of the machine we a running on
@@ -1685,8 +1689,8 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   if (handlesWindowDecorations == YES)
     {
       static Atom	_offsets_name = None;
-      unsigned		i;
-      int		count;
+      NSUInteger        i;
+      NSUInteger        count;
       uint16_t		*offsets;
 
       /* Offsets for NSBorderlessWindowMask *should* always be zero.
@@ -1835,14 +1839,14 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
 
 -(BOOL) _createNetIcon: (NSImage*)image 
 		result: (long**)pixeldata 
-		  size: (int*)size
+		  size: (NSUInteger *)size
 {
   NSBitmapImageRep *rep;
-  int i, j, w, h, samples;
+  NSInteger i, j, w, h, samples;
   unsigned char *data;
-  int index;
+  NSUInteger index;
   long *iconPropertyData;
-  int iconSize;
+  NSUInteger iconSize;
  
   rep = getStandardBitmap(image);
   if (rep == nil)
@@ -1927,7 +1931,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   static Atom icon_atom = None;
   static BOOL didCreateNetIcon = NO;
   static long *iconPropertyData = NULL;
-  static int iconSize;
+  static NSUInteger iconSize;
   NSImage *image;
 
   /* Initialize the atom if needed */
@@ -1953,15 +1957,16 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
 
   if (iconPropertyData != 0)
     {
+      /* todo: add NSAssert to check if icon is not too large */
       XChangeProperty(dpy, window,
 		      icon_atom, XA_CARDINAL, 
 		      32, PropModeReplace,
-		      (unsigned char *)iconPropertyData, iconSize);
+		      (unsigned char *)iconPropertyData, (int)iconSize);
     }
 }
 
-- (int) window: (NSRect)frame : (NSBackingStoreType)type : (unsigned int)style
-	      : (int)screen
+- (NSInteger) window: (NSRect)frame : (NSBackingStoreType)type : (NSUInteger)style
+                    : (NSInteger)screen
 {
   gswindow_device_t	*window;
   gswindow_device_t	*root;
@@ -2168,8 +2173,8 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   return window->number;
 }
 
-- (int) nativeWindow: (void *)winref : (NSRect*)frame : (NSBackingStoreType*)type 
-		    : (unsigned int*)style : (int*)screen
+- (NSInteger) nativeWindow: (void *)winref : (NSRect*)frame : (NSBackingStoreType*)type 
+                          : (NSUInteger*)style : (NSInteger*)screen
 {
   gswindow_device_t	*window;
   gswindow_device_t	*root;
@@ -2332,14 +2337,14 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
  * Return the offsets between the window content-view and it's frame
  * depending on the window style.
  */
-- (void) styleoffsets: (float *) l : (float *) r : (float *) t : (float *) b 
-		     : (unsigned int) style
+- (void) styleoffsets: (CGFloat *) l : (CGFloat *) r : (CGFloat *) t : (CGFloat *) b 
+		     : (NSUInteger) style
 {
   [self styleoffsets: l : r : t : b : style : (Window) 0];
 }
 
-- (void) styleoffsets: (float *) l : (float *) r : (float *) t : (float *) b 
-		     : (unsigned int) style : (Window) win
+- (void) styleoffsets: (CGFloat *) l : (CGFloat *) r : (CGFloat *) t : (CGFloat *) b 
+		     : (NSUInteger) style : (Window) win
 {
   Offsets	*o;
 
@@ -2357,7 +2362,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   /* First check _NET_FRAME_EXTENTS */
   if (win  && ((generic.wm & XGWM_EWMH) != 0)) 
     {
-      int count;
+      NSUInteger count;
       unsigned long *extents;
 
       if (_net_frame_extents == None)
@@ -2553,7 +2558,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
   [self _createBuffer: window];
 }
 
-- (void) titlewindow: (NSString *)window_title : (int) win
+- (void) titlewindow: (NSString *)window_title : (NSInteger)win
 {
   gswindow_device_t *window;
 
@@ -2561,7 +2566,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
   if (!window)
     return;
 
-  NSDebugLLog(@"XGTrace", @"DPStitlewindow: %@ : %d", window_title, win);
+  NSDebugLLog(@"XGTrace", @"DPStitlewindow: %@ : %ld", window_title, (long)win);
   if (window_title && window->ident)
     {
       XTextProperty windowName;
@@ -2598,10 +2603,10 @@ NSLog(@"styleoffsets ... guessing offsets\n");
       char *name = (char *)[window_title UTF8String];
       XChangeProperty(dpy, window->ident, _net_wm_name, _utf8,
 		      8, PropModeReplace, 
-		      (unsigned char *)name, strlen(name));
+		      (unsigned char *)name, (int)strlen(name));
       XChangeProperty(dpy, window->ident, _net_wm_icon_name, _utf8,
 		      8, PropModeReplace, 
-		      (unsigned char *)name, strlen(name));
+		      (unsigned char *)name, (int)strlen(name));
       }
 
       XFree(windowName.value);
@@ -2677,8 +2682,8 @@ NSLog(@"styleoffsets ... guessing offsets\n");
       nswin = GSWindowWithNumber(window->number);
       if (nswin != nil)
 	{
-	  int			iNum = [[nswin counterpart] windowNumber];
-	  gswindow_device_t	*iconw = WINDOW_WITH_TAG(iNum);
+	  NSInteger iNum = [[nswin counterpart] windowNumber];
+	  gswindow_device_t *iconw = WINDOW_WITH_TAG(iNum);
 
 	  if (iconw != 0)
 	    {
@@ -2707,9 +2712,9 @@ NSLog(@"styleoffsets ... guessing offsets\n");
      under metacity, which sets _NET_WM_STATE for shaded windows to both
      _NET_WM_STATE_SHADED and _NET_WM_STATE_HIDDEN. */
   if (generic.flags.appOwnsMiniwindow && !(generic.wm & XGWM_WINDOWMAKER))
-    XWithdrawWindow(dpy, window->ident, window->screen);
+    XWithdrawWindow(dpy, window->ident, (int)window->screen);
   else if (window->wm_state != IconicState)
-    XIconifyWindow(dpy, window->ident, window->screen);
+    XIconifyWindow(dpy, window->ident, (int)window->screen);
 }
 
 /**
@@ -2720,7 +2725,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
 {
   unsigned width, height;
   gswindow_device_t *window;
-  float	t, b, l, r;
+  CGFloat t, b, l, r;
 
   NSDebugLLog(@"XGTrace", @"DPSwindowdevice: %d ", win);
   window = WINDOW_WITH_TAG(win);
@@ -2780,7 +2785,7 @@ static BOOL didCreatePixmaps;
 {
   NSImage *image;
   NSBitmapImageRep *rep;
-  int i, j, w, h, samples, screen;
+  NSInteger i, j, w, h, samples, screen;
   unsigned char *data;
   XColor pixelColor;
   GC pixgc;
@@ -2800,7 +2805,7 @@ static BOOL didCreatePixmaps;
   screen = [[[self screenList] objectAtIndex: 0] intValue];
   xIconPixmap = XCreatePixmap(dpy,
                       [self xDisplayRootWindowForScreen: screen],
-                      [rep pixelsWide], [rep pixelsHigh],
+                      (unsigned)[rep pixelsWide], (unsigned)[rep pixelsHigh],
                       DefaultDepth(dpy, screen));
   pixgc = XCreateGC(dpy, xIconPixmap, 0, NULL);
 
@@ -2820,7 +2825,7 @@ static BOOL didCreatePixmaps;
 
 	  RGetClosestXColor(rcontext, &pixelRColor, &pixelColor);
 	  XSetForeground(dpy, pixgc, pixelColor. pixel);
-	  XDrawPoint(dpy, xIconPixmap, pixgc, j, i);
+	  XDrawPoint(dpy, xIconPixmap, pixgc, (int)j, (int)i);
 	  d += samples;
 	}
       data += [rep bytesPerRow];
@@ -2840,7 +2845,7 @@ static BOOL didCreatePixmaps;
 {
   gswindow_device_t	*window;
   gswindow_device_t	*other;
-  int		level;
+  NSInteger		level;
 
   window = WINDOW_WITH_TAG(winNum);
   if (winNum == 0 || window == NULL)
@@ -2983,14 +2988,14 @@ static BOOL didCreatePixmaps;
 	    XWindowChanges chg;
 	    chg.sibling = other->ident;
 	    chg.stack_mode = Below;
-	    XReconfigureWMWindow(dpy, window->ident, window->screen,
+	    XReconfigureWMWindow(dpy, window->ident, (int)window->screen,
 	      CWSibling|CWStackMode, &chg);
 	  }
 	else
 	  {
 	    XWindowChanges chg;
 	    chg.stack_mode = Below;
-	    XReconfigureWMWindow(dpy, window->ident, window->screen,
+	    XReconfigureWMWindow(dpy, window->ident, (int)window->screen,
 	      CWStackMode, &chg);
 	  }
 	XMapWindow(dpy, window->ident);
@@ -3002,21 +3007,21 @@ static BOOL didCreatePixmaps;
 	    XWindowChanges chg;
 	    chg.sibling = other->ident;
 	    chg.stack_mode = Above;
-	    XReconfigureWMWindow(dpy, window->ident, window->screen,
+	    XReconfigureWMWindow(dpy, window->ident, (int)window->screen,
 	      CWSibling|CWStackMode, &chg);
 	  }
 	else
 	  {
 	    XWindowChanges chg;
 	    chg.stack_mode = Above;
-	    XReconfigureWMWindow(dpy, window->ident, window->screen,
+	    XReconfigureWMWindow(dpy, window->ident, (int)window->screen,
 	      CWStackMode, &chg);
 	  }
 	XMapWindow(dpy, window->ident);
 	break;
 
       case NSWindowOut:
-        XWithdrawWindow (dpy, window->ident, window->screen);
+        XWithdrawWindow (dpy, window->ident, (int)window->screen);
 	break;
     }
   /*
@@ -3470,7 +3475,7 @@ static BOOL didCreatePixmaps;
     }
 }
 
-- (int) windowlevel: (int)win
+- (NSInteger) windowlevel: (NSInteger)win
 {
   gswindow_device_t *window;
 
@@ -3489,7 +3494,7 @@ static BOOL didCreatePixmaps;
   Window *windowOrder;
   gswindow_device_t *tmp;
   NSMutableArray *ret;
-  int c;
+  NSUInteger c;
   static Atom client_stack_atom = None;
  
   if (!client_stack_atom)
@@ -3514,7 +3519,7 @@ static BOOL didCreatePixmaps;
        * interested in the ones which are ours. */
       if (tmp)
         {
-          [ret addObject:[NSNumber numberWithInt:tmp->number]];
+          [ret addObject:[NSNumber numberWithLong:tmp->number]];
         }
     }
   
@@ -3653,7 +3658,7 @@ static BOOL didCreatePixmaps;
   XGCValues values;
   unsigned long valuemask;
   gswindow_device_t *window;
-  float	l, r, t, b;
+  CGFloat	l, r, t, b;
 
   window = WINDOW_WITH_TAG(win);
   if (win == 0 || window == NULL)
@@ -3710,8 +3715,8 @@ static BOOL didCreatePixmaps;
     {
       XSyncValue value;
       XSyncIntsToValue(&value,
-		       window->net_wm_sync_request_counter_value_low,
-		       window->net_wm_sync_request_counter_value_high);
+		       (unsigned)window->net_wm_sync_request_counter_value_low,
+		       (int)window->net_wm_sync_request_counter_value_high);
       XSyncSetCounter(dpy, window->net_wm_sync_request_counter, value);
       window->net_wm_sync_request_counter_value_low = 0;
       window->net_wm_sync_request_counter_value_high = 0;
@@ -3722,9 +3727,9 @@ static BOOL didCreatePixmaps;
 }
 
 // handle X expose events
-- (void) _processExposedRectangles: (int)win
+- (void) _processExposedRectangles: (NSInteger)win
 {
-  int n;
+  NSUInteger n;
   gswindow_device_t *window;
   NSWindow *gui_win;
 
@@ -3750,7 +3755,7 @@ static BOOL didCreatePixmaps;
     {
       NSView *v;
       NSValue *val[n];
-      int i;
+      NSUInteger i;
 
       v = [[gui_win contentView] superview];
 	
@@ -3963,7 +3968,7 @@ static BOOL didCreatePixmaps;
 {
   gswindow_device_t *window = WINDOW_WITH_TAG(win);
   static Atom opacity_atom = None;
-  int c;
+  NSUInteger c;
   unsigned int *num;
   float alpha = 0.0;
 
@@ -4103,12 +4108,12 @@ static BOOL   cursor_hidden = NO;
 
 Pixmap
 xgps_cursor_mask(Display *xdpy, Drawable draw, const unsigned char *data,
-		  int w, int h, int colors)
+		 NSInteger w, NSInteger h, NSInteger colors)
 {
-  int j, i;
+  NSInteger j, i;
   unsigned char	ialpha;
   Pixmap pix;
-  int bitmapSize = ((w + 7) >> 3) * h; // (w/8) rounded up times height
+  NSInteger bitmapSize = ((w + 7) >> 3) * h; // (w/8) rounded up times height
   char *aData = calloc(1, bitmapSize);
   char *cData = aData;
 
@@ -4143,19 +4148,20 @@ xgps_cursor_mask(Display *xdpy, Drawable draw, const unsigned char *data,
 	}
     }
 
-  pix = XCreatePixmapFromBitmapData(xdpy, draw, (char *)aData, w, h, 
+  pix = XCreatePixmapFromBitmapData(xdpy, draw, (char *)aData, (unsigned)w, (unsigned)h, 
 				    1L, 0L, 1);
   free(aData);
   return pix;
 }
 
-Pixmap
+#if !HAVE_XCURSOR
+static Pixmap
 xgps_cursor_image(Display *xdpy, Drawable draw, const unsigned char *data, 
-		  int w, int h, int colors, XColor *fg, XColor *bg)
+		  NSInteger w, NSInteger h, NSInteger colors, XColor *fg, XColor *bg)
 {
-  int j, i, min, max;
+  NSInteger j, i, min, max;
   Pixmap pix;
-  int bitmapSize = ((w + 7) >> 3) * h; // w/8 rounded up multiplied by h
+  NSInteger bitmapSize = ((w + 7) >> 3) * h; // w/8 rounded up multiplied by h
   char *aData = calloc(1, bitmapSize);
   char *cData = aData;
 
@@ -4219,11 +4225,12 @@ xgps_cursor_image(Display *xdpy, Drawable draw, const unsigned char *data,
 	}
     }
   
-  pix = XCreatePixmapFromBitmapData(xdpy, draw, (char *)aData, w, h, 
+  pix = XCreatePixmapFromBitmapData(xdpy, draw, (char *)aData, (unsigned)w, (unsigned)h, 
 				    1L, 0L, 1);
   free(aData);
   return pix;
 }
+#endif
 
 - (void) hidecursor
 {
@@ -4297,8 +4304,8 @@ xgps_cursor_image(Display *xdpy, Drawable draw, const unsigned char *data,
 {
   Cursor cursor;
   NSBitmapImageRep *rep;
-  int w, h;
-  int colors;
+  NSInteger w, h;
+  NSInteger colors;
   const unsigned char *data;
 
   rep = getStandardBitmap(image);
@@ -4338,13 +4345,13 @@ xgps_cursor_image(Display *xdpy, Drawable draw, const unsigned char *data,
 
   {
     XcursorImage *xcursorImage;
-    xcursorImage = XcursorImageCreate(w, h);
+    xcursorImage = XcursorImageCreate((int)w, (int)h);
     xcursorImage->xhot = hotp.x;
     xcursorImage->yhot = hotp.y;
 
     // Copy the data from the image rep to the Xcursor structure
     {
-      int bytesPerRow;
+      NSInteger bytesPerRow;
       size_t row;
 
       bytesPerRow = [rep bytesPerRow];
@@ -4529,7 +4536,7 @@ _computeDepth(int class, int bpp)
  int count = ScreenCount(dpy);
  NSMutableArray *screens = [NSMutableArray arrayWithCapacity: count];
  if (count > 0)
-   [screens addObject: [NSNumber numberWithInt: defScreen]];
+   [screens addObject: [NSNumber numberWithInteger: defScreen]];
  for (i = 0; i < count; i++)
    {
      if (i != defScreen)
@@ -4640,7 +4647,7 @@ _computeDepth(int class, int bpp)
   Atom rgba_image_atom;
   Window win;
   Window *pwin;
-  int count;
+  NSUInteger count;
   unsigned char *tile;
   NSImage *iconTileImage;
   NSBitmapImageRep *imageRep;
@@ -4727,7 +4734,7 @@ _computeDepth(int class, int bpp)
 - (unsigned int) numberOfDesktops: (int)screen
 {
   static Atom number_of_desktops = None;
-  int c;
+  NSUInteger c;
   unsigned int *num;
   unsigned int number = 0;
 
@@ -4750,7 +4757,7 @@ _computeDepth(int class, int bpp)
 {
   static Atom utf8_string = None;
   static Atom desktop_names = None;
-  int c;
+  NSUInteger c;
   char *names;
 
   if (utf8_string == None)
@@ -4782,7 +4789,7 @@ _computeDepth(int class, int bpp)
 - (unsigned int) desktopNumberForScreen: (int)screen
 {
   static Atom current_desktop = None;
-  int c;
+  NSUInteger c;
   unsigned int *num;
   unsigned int number = 0;
 
@@ -4822,7 +4829,7 @@ _computeDepth(int class, int bpp)
 {
   gswindow_device_t	*window;
   static Atom wm_desktop = None;
-  int c;
+  NSUInteger c;
   unsigned int *num;
   unsigned int number = 0;
 
@@ -4904,11 +4911,11 @@ _computeDepth(int class, int bpp)
     }
 }
 
-- (BOOL) hasShadow: (int)win
+- (BOOL) hasShadow: (NSInteger)win
 {
   gswindow_device_t	*window;
   static Atom wm_window_shadow = None;
-  int c;
+  NSUInteger c;
   unsigned int *num;
   BOOL hasShadow = NO;
 
@@ -4936,7 +4943,7 @@ _computeDepth(int class, int bpp)
  * Check whether the window is miniaturized according to the ICCCM window
  * state property.
  */
-- (int) _wm_state: (Window)win
+- (NSInteger) _wm_state: (Window)win
 {
   long *data;
   long state;
@@ -4963,8 +4970,8 @@ _computeDepth(int class, int bpp)
 - (BOOL) _ewmh_isHidden: (Window)win
 {
   Atom *data;
-  int count;
-  int i;
+  NSUInteger count;
+  NSUInteger i;
 
   data = (Atom *)PropGetCheckProperty(dpy, win, 
                                       generic.netstates.net_wm_state_atom, 

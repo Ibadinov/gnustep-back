@@ -359,6 +359,8 @@ double t;
 static double (*filterf)() = Mitchell_filter;
 static double fwidth = Mitchell_support;
 
+extern void
+_wraster_change_filter(int type);
 void
 _wraster_change_filter(int type)
 {

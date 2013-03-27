@@ -873,10 +873,10 @@ fpfloat(FILE *stream, float f)
 
 
 static void
-writeHex(FILE *gstream, const unsigned char *data, int count)
+writeHex(FILE *gstream, const unsigned char *data, NSInteger count)
 {
-static const char *hexdigits = "0123456789abcdef";
-  int i;
+  static const char *hexdigits = "0123456789abcdef";
+  NSInteger i;
   for (i = 0; i < count; i++)
     {
       fputc(hexdigits[(int)(data[i] / 16)], gstream);

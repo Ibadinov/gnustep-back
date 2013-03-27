@@ -267,6 +267,8 @@ RPutXImage(RContext *context, Drawable d, GC gc, RXImage *ximage, int src_x,
 
 
 #ifdef XSHM
+extern Pixmap
+R_CreateXImageMappedPixmap(RContext *context, RXImage *rximage);
 Pixmap
 R_CreateXImageMappedPixmap(RContext *context, RXImage *rximage)
 {

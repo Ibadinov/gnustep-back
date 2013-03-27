@@ -39,7 +39,7 @@
 #include <GNUstepGUI/GSFontInfo.h>
 
 /* Font function (defined in XGFontManager) */
-extern NSString	*XGXFontName(NSString *fontName, float size);
+extern NSString	*XGXFontName(NSString *fontName, CGFloat size);
 
 /* Font functions (defined in XGCommonFont) */
 extern NSString *XGFontCacheName(Display *dpy);
@@ -70,16 +70,16 @@ extern unsigned long XGFontPropULong(Display *dpy, XFontStruct *font_struct,
 - (void) drawString:  (NSString*)string
 	  onDisplay: (Display*) xdpy drawable: (Drawable) draw
 	       with: (GC) xgcntxt at: (XPoint) xp;
-- (void) draw: (const char*) s length: (int) len 
+- (void) draw: (const char*) s length: (NSUInteger) len 
     onDisplay: (Display*) xdpy drawable: (Drawable) draw
 	 with: (GC) xgcntxt at: (XPoint) xp;
-- (float) widthOf: (const char*) s length: (int) len;
+- (CGFloat) widthOf: (const char*) s length: (NSUInteger) len;
 - (void) setActiveFor: (Display*) xdpy gc: (GC) xgcntxt;
 
-- (void) drawGlyphs: (const NSGlyph *) glyphs length: (int) len
+- (void) drawGlyphs: (const NSGlyph *) glyphs length: (NSUInteger) len
 	  onDisplay: (Display*) xdpy drawable: (Drawable) draw
 	       with: (GC) xgcntxt at: (XPoint) xp;
-- (float) widthOfGlyphs: (const NSGlyph *) glyphs length: (int) len;
+- (CGFloat) widthOfGlyphs: (const NSGlyph *) glyphs length: (NSUInteger) len;
 
 @end
 
@@ -94,10 +94,10 @@ extern int _pixmap_combine_alpha(RContext *context,
 
 extern int _bitmap_combine_alpha(RContext *context,
 		unsigned char * data_planes[5],
-		int width, int height,
-		int bits_per_sample, int samples_per_pixel,
-		int bits_per_pixel, int bytes_per_row,
-		int colour_space, BOOL one_is_black,
+		NSInteger width, NSInteger height,
+		NSInteger bits_per_sample, NSInteger samples_per_pixel,
+		NSInteger bits_per_pixel, NSInteger bytes_per_row,
+		NSInteger colour_space, BOOL one_is_black,
 		BOOL is_planar, BOOL has_alpha, BOOL fast_min,
 		RXImage *dest_im, RXImage *dest_alpha,
 		XRectangle srect, XRectangle drect,

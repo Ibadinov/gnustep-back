@@ -55,7 +55,7 @@ typedef enum {
 @interface XGServer : GSDisplayServer
 {
   Display           *dpy;
-  int               defScreen;
+  NSInteger         defScreen;
   NSMapTable        *screenList;
   Window	    grabWindow;
   struct XGGeneric  generic;
@@ -66,15 +66,15 @@ typedef enum {
 - (Display*) xDisplay;
 - (Window) xAppRootWindow;
 
-- (void *) xrContextForScreen: (int)screen_number;
-- (Visual *) visualForScreen: (int)screen_number;
-- (int) depthForScreen: (int)screen_number;
+- (void *) xrContextForScreen: (NSInteger)screenNumber;
+- (Visual *) visualForScreen: (NSInteger)screenNumber;
+- (int) depthForScreen: (NSInteger)screenNumber;
 
-- (XGDrawMechanism) drawMechanismForScreen: (int)screen_number;
-- (void) getForScreen: (int)screen_number pixelFormat: (int *)bpp_number 
-                masks: (int *)red_mask : (int *)green_mask : (int *)blue_mask;
-- (Window) xDisplayRootWindowForScreen: (int)screen_number;
-- (XColor) xColorFromColor: (XColor)color forScreen: (int)screen_number;
+- (XGDrawMechanism) drawMechanismForScreen: (NSInteger)screenNumber;
+- (void) getForScreen: (NSInteger)screenNumber pixelFormat: (NSInteger *)bitsPerPixel
+                masks: (NSUInteger *)red_mask : (NSUInteger *)green_mask : (NSUInteger *)blue_mask;
+- (Window) xDisplayRootWindowForScreen: (NSInteger)screenNumber;
+- (XColor) xColorFromColor: (XColor)color forScreen: (NSInteger)screenNumber;
 
 + (void) waitAllContexts;
 @end

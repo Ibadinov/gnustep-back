@@ -40,7 +40,7 @@
 
 void 		GSEnsureDndIsInitialized (void);
 DndClass 	xdnd (void);
-Atom		GSActionForDragOperation(unsigned int op);
+Atom		GSActionForDragOperation(NSDragOperation op);
 NSDragOperation	GSDragOperationForAction(Atom xaction);
 
 
