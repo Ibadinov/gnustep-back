@@ -40,14 +40,14 @@
 	BOOL _screenFont;
 	CGFloat lineHeight;
 
-	unsigned int _cacheSize;
+	NSUInteger _cacheSize;
 	unsigned int *_cachedGlyphs;
 	NSSize *_cachedSizes;
 }
 
-- (void) setCacheSize:(unsigned int)size;
+- (void) setCacheSize:(NSUInteger)size;
 - (void) drawGlyphs: (const NSGlyph*)glyphs
-	     length: (int)length 
+	     length: (NSUInteger)length 
 	         on: (cairo_t*)ct;
 @end
 

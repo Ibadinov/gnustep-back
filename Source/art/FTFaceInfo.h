@@ -45,7 +45,7 @@
     int pixel_size;
     NSArray *files;
   } *sizes;
-  int num_sizes;
+  NSUInteger num_sizes;
 
   int weight;
   unsigned int traits;

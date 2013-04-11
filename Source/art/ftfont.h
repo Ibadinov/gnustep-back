@@ -27,6 +27,8 @@
 
 @class NSAffineTransform;
 
+struct draw_info_s;
+
 @protocol FTFontInfo
 -(void) drawString: (const char *)s
 	at: (int)x : (int)y
@@ -40,7 +42,7 @@
         widthChar: (int) wch
 	drawinfo: (struct draw_info_s *)di;
 
--(void) drawGlyphs: (const NSGlyph *)glyphs : (int)length
+-(void) drawGlyphs: (const NSGlyph *)glyphs : (NSUInteger)length
 	at: (int)x : (int)y
 	to: (int)x0 : (int)y0 : (int)x1 : (int)y1
 	: (unsigned char *)buf : (int)bpl
@@ -49,7 +51,7 @@
 	transform: (NSAffineTransform *)transform
 	drawinfo: (struct draw_info_s *)di;
 
--(void) drawGlyphs: (const NSGlyph *)glyphs : (int)length
+-(void) drawGlyphs: (const NSGlyph *)glyphs : (NSUInteger)length
 	at: (int)x : (int)y
 	to: (int)x0 : (int)y0 : (int)x1 : (int)y1
 	: (unsigned char *)buf : (int)bpl

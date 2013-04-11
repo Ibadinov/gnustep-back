@@ -432,17 +432,17 @@ static NSMapTable *gtable;
   [gstate GSSetTextPosition: loc];
 }
 
-- (void) GSShowText: (const char *)string : (size_t) length
+- (void) GSShowText: (const char *)string : (NSUInteger) length
 {
   [gstate GSShowText: string : length];
 }
 
-- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (size_t) length
+- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (NSUInteger) length
 {
   [gstate GSShowGlyphs: glyphs : length];
 }
 
-- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (size_t) length
+- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (NSUInteger) length
 {
   [gstate GSShowGlyphsWithAdvances: glyphs : advances : length];
 }

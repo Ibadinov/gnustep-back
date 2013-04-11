@@ -643,12 +643,12 @@ typedef enum {
   [textCtm translateToPoint: loc];
 }
 
-- (void) GSShowText: (const char *)string : (size_t) length
+- (void) GSShowText: (const char *)string : (NSUInteger) length
 {
   [self subclassResponsibility: _cmd];
 }
 
-- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (size_t) length
+- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (NSUInteger) length
 {
   int i;
   NSSize advances[length];
@@ -661,7 +661,7 @@ typedef enum {
   [self GSShowGlyphsWithAdvances: glyphs : advances : length];
 }
 
-- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (size_t) length
+- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (NSUInteger) length
 {
   [self subclassResponsibility: _cmd];
 }

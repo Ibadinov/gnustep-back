@@ -283,14 +283,14 @@ fpfloat(FILE *stream, float f)
   [self notImplemented: _cmd];
 }
 
-- (void) GSShowText: (const char *)string : (size_t)length
+- (void) GSShowText: (const char *)string : (NSUInteger)length
 {
   fprintf(gstream, "(");
   [self output:string length: length];
   fprintf(gstream, ") show\n");
 }
 
-- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (size_t)length
+- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (NSUInteger)length
 {
   GSFontInfo *font = gstate->font;
   if ([font respondsToSelector: @selector(nameOfGlyph:)])
@@ -321,7 +321,7 @@ fpfloat(FILE *stream, float f)
 
 - (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs
                                  : (const NSSize *)advances
-                                 : (size_t)length
+                                 : (NSUInteger)length
 {
   // FIXME: Currently advances is ignored
   [self GSShowGlyphs: glyphs : length];

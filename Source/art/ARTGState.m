@@ -23,11 +23,12 @@
 */
 #include <math.h>
 
-#include <AppKit/NSAffineTransform.h>
-#include <AppKit/NSBezierPath.h>
-#include <AppKit/NSColor.h>
+#import <AppKit/NSAffineTransform.h>
+#import <AppKit/NSBezierPath.h>
+#import <AppKit/NSColor.h>
+#import <Foundation/NSException.h>
 
-#include "ARTGState.h"
+#import "ARTGState.h"
 
 #include "blit.h"
 #include "ftfont.h"
@@ -356,7 +357,7 @@ draw_info_t ART_DI;
 }
 
 
-- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (size_t) length
+- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (NSUInteger) length
 {
   // FIXME: Currently advances is ignored
   NSPoint p;
@@ -465,6 +466,7 @@ draw_info_t ART_DI;
 
 - (void) DPSsetdash: (const CGFloat*)pat : (NSInteger)size : (CGFloat)offs
 {
+  NSParameterAssert(size <= INT_MAX);
   NSInteger i;
 
   if (dash.n_dash)
@@ -478,7 +480,7 @@ draw_info_t ART_DI;
   if (size>0)
     {
       dash.offset = offs;
-      dash.n_dash = size;
+      dash.n_dash = (int)size;
       dash.dash = malloc(sizeof(double)*size);
       if (!dash.dash)
         {

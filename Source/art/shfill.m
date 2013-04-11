@@ -224,7 +224,7 @@ static BOOL _rect_advance(rect_trace_t * t, int *x0, int *x1)
 typedef struct function_s
 {
   /* General information about the function. */
-  int num_in, num_out;
+  NSInteger num_in, num_out;
   void (* eval)(struct function_s *f, double *in, double *out);
 
   double * domain; /* num_in * 2 */
@@ -502,8 +502,8 @@ static BOOL function_setup(NSDictionary * d, function_t *f)
     f->encode = NULL;
     free(f->decode);
     f->decode = NULL;
-    NSDebugLLog(@"GSArt -shfill", @"Need %i bytes of data, DataSource only has %i bytes.", 
-      j, [data length]);
+    NSDebugLLog(@"GSArt -shfill", @"Need %i bytes of data, DataSource only has %lu bytes.", 
+      j, (unsigned long)[data length]);
     return NO;
   }
 

@@ -515,7 +515,7 @@ within one pixel.) */
 {
   ArtBpath *bpath, *bp2;
   ArtVpath *vp;
-  int i, j, c, cur_start, cur_line;
+  NSInteger i, j, c, cur_start, cur_line;
   NSPoint points[3];
   NSBezierPathElement t;
   double matrix[6];
@@ -731,8 +731,8 @@ static void clip_svp_callback(void *data, int y, int start,
   ci.index = malloc(sizeof(unsigned int) * (clip_sy + 1));
   if (!ci.index)
     {
-      NSLog(@"Warning: out of memory calculating clipping spans (%i bytes)",
-	    sizeof(unsigned int) * (clip_sy + 1));
+      NSLog(@"Warning: out of memory calculating clipping spans (%lu bytes)",
+	    (unsigned long)(sizeof(unsigned int) * (clip_sy + 1)));
       return;
     }
   ci.span_size = ci.num_span = 0;

@@ -84,7 +84,7 @@ from the back-art-subpixel-text defaults key
 1: subpixel, rgb
 2: subpixel, bgr
 */
-static int subpixel_text;
+static NSInteger subpixel_text;
 
 
 
@@ -136,7 +136,7 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
 {
   FT_Error err;
   NSArray *rfi = (NSArray *)fid;
-  int i, c = [rfi count];
+  NSUInteger i, c = [rfi count];
   const char *face_name = [[rfi objectAtIndex: 0] fileSystemRepresentation];
 
   NSDebugLLog(@"ftfont", @"ft_get_face: %@ '%s'", rfi, face_name);
@@ -416,7 +416,7 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
   return lineHeight;
 }
 
-- (unsigned) numberOfGlyphs
+- (NSUInteger) numberOfGlyphs
 {
   if (coveredCharacterSet == nil)
     {
@@ -610,7 +610,7 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
             {
               NSLog(@"FTC_SBitCache_Lookup() failed with error %08x "
                 @"(%08x, %08x, %ix%i, %08x)",
-                error, glyph, imageType.face_id, imageType.width,
+                error, glyph, (unsigned)imageType.face_id, imageType.width,
                 imageType.height, imageType.flags);
               continue;
             }
@@ -946,7 +946,7 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
 }
 
 
-- (void) drawGlyphs: (const NSGlyph *)glyphs : (int)length
+- (void) drawGlyphs: (const NSGlyph *)glyphs : (NSUInteger)length
         at: (int)x : (int)y
         to: (int)x0 : (int)y0 : (int)x1 : (int)y1
         : (unsigned char *)buf : (int)bpl
@@ -1040,7 +1040,7 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
             {
               NSLog(@"FTC_SBitCache_Lookup() failed with error %08x "
                 @"(%08x, %08x, %ix%i, %08x)",
-                error, glyph, imageType.face_id,
+                error, glyph, (unsigned)imageType.face_id,
                 imageType.width, imageType.height,
                 imageType.flags);
               continue;
@@ -1266,7 +1266,7 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
     }
 }
 
-- (void) drawGlyphs: (const NSGlyph *)glyphs : (int)length
+- (void) drawGlyphs: (const NSGlyph *)glyphs : (NSUInteger)length
         at: (int)x : (int)y
         to: (int)x0 : (int)y0 : (int)x1 : (int)y1
         : (unsigned char *)buf : (int)bpl
@@ -1360,7 +1360,7 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
             {
               if (glyph != 0xffffffff)
                 NSLog(@"FTC_SBitCache_Lookup() failed with error %08x (%08x, %08x, %ix%i, %08x)",
-                  error, glyph, imageType.face_id, imageType.width, imageType.height,
+                  error, glyph, (unsigned)imageType.face_id, imageType.width, imageType.height,
                   imageType.flags
                 );
               continue;
@@ -1628,7 +1628,7 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
       if ((error = FTC_SBitCache_Lookup(ftc_sbitcache, &imageType, glyph, &sbit, NULL)))
         {
           NSLog(@"FTC_SBitCache_Lookup() failed with error %08x (%08x, %08x, %ix%i, %08x)",
-            error, glyph, imageType.face_id,
+            error, glyph, (unsigned)imageType.face_id,
             imageType.width, imageType.height,
             imageType.flags
         );
@@ -1756,8 +1756,8 @@ static FT_Error ft_get_face(FTC_FaceID fid, FT_Library lib,
 - (CGFloat) widthOfString: (NSString*)string
 {
   unichar ch;
-  int i, c = [string length];
-  int total;
+  NSUInteger i, c = [string length];
+  NSInteger total;
 
   unsigned int glyph;
 
@@ -2020,12 +2020,12 @@ static int bezierpath_cubic_to(const FT_Vector *c1, const FT_Vector *c2,
 }
 
 static FT_Outline_Funcs bezierpath_funcs = {
-  move_to:bezierpath_move_to,
-  line_to:bezierpath_line_to,
-  conic_to:bezierpath_conic_to,
-  cubic_to:bezierpath_cubic_to,
-  shift:10,
-  delta:0,
+  .move_to = bezierpath_move_to,
+  .line_to = bezierpath_line_to,
+  .conic_to = bezierpath_conic_to,
+  .cubic_to = bezierpath_cubic_to,
+  .shift = 10,
+  .delta = 0,
 };
 
 
@@ -2112,7 +2112,7 @@ add code to avoid loading bitmaps for glyphs */
 }
 
 - (void) appendBezierPathWithGlyphs: (NSGlyph *)glyphs
-                              count: (int)count
+                              count: (NSInteger)count
                        toBezierPath: (NSBezierPath *)path
 {
   int i;
@@ -2212,7 +2212,8 @@ static int filters[3][7]=
               [NSString stringWithFormat: @"back-art-subpixel-filter-%i",i]];
         if (s)
           {
-            int j, c, sum, v;
+            NSUInteger j, c;
+            int sum, v;
             a = [s componentsSeparatedByString: @" "];
             c = [a count];
             if (!c)

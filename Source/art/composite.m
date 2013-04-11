@@ -41,9 +41,9 @@
 windows are known to be totally opaque, we can optimize in many ways
 (see big table at the end of blit.m). Will set dst_need_alpha and blit_func
 if necessary. Returns new operation, or -1 it it's a noop. */
-- (int) _composite_func: (BOOL)src_opaque : (BOOL)src_transparent
-	: (BOOL)dst_opaque : (BOOL *)dst_needs_alpha
-	: (int)op : (void (**)(composite_run_t *c, int num))blit_func_r
+- (NSInteger) _composite_func: (BOOL)src_opaque : (BOOL)src_transparent
+                             : (BOOL)dst_opaque : (BOOL *)dst_needs_alpha
+                             : (NSCompositingOperation)op : (void (**)(composite_run_t *c, int num))blit_func_r
 {
   void (*blit_func)(composite_run_t *c, int num);
 
@@ -429,7 +429,7 @@ static BOOL _rect_advance(rect_trace_t *t, int *x0, int *x1)
   ARTGState *ags = (ARTGState *)source;
   unsigned char *dst, *dst_alpha, *src, *src_alpha;
 
-  int op;
+  NSInteger op;
   void (*blit_func)(composite_run_t *c, int num) = NULL;
 
   NSPoint sp, dp;
@@ -608,12 +608,12 @@ static BOOL _rect_advance(rect_trace_t *t, int *x0, int *x1)
 
   if (!blit_func)
     {
-      NSLog(@"unimplemented: compositeGState: %p fromRect: (%g %g)+(%g %g) toPoint: (%g %g)  op: %i",
+      NSLog(@"unimplemented: compositeGState: %p fromRect: (%g %g)+(%g %g) toPoint: (%g %g)  op: %ld",
 	    source,
 	    aRect.origin.x, aRect.origin.y,
 	    aRect.size.width, aRect.size.height,
 	    aPoint.x, aPoint.y,
-	    op);
+	    (long)op);
       return;
     }
 
@@ -1505,10 +1505,10 @@ static BOOL _rect_advance(rect_trace_t *t, int *x0, int *x1)
     }
   else
     {
-      NSLog(@"unimplemented compositerect: (%g %g)+(%g %g)  op: %i",
+      NSLog(@"unimplemented compositerect: (%g %g)+(%g %g)  op: %ld",
 	    aRect.origin.x, aRect.origin.y,
 	    aRect.size.width, aRect.size.height,
-	    op);
+	    (long)op);
     }
   UPDATE_UNBUFFERED
 }

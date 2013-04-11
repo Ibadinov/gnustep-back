@@ -121,7 +121,7 @@
 						   bitsPerPixel: 32] autorelease];
 
       src = cairo_xlib_surface_create(dpy, win, attrs.visual, attrs.width, attrs.height);
-      dest = cairo_image_surface_create_for_data([bmp bitmapData], CAIRO_FORMAT_ARGB32, width, height, [bmp bytesPerRow]);
+      dest = cairo_image_surface_create_for_data([bmp bitmapData], CAIRO_FORMAT_ARGB32, (int)width, (int)height, (int)[bmp bytesPerRow]);
       
       {
 	cairo_t *cr = cairo_create(dest);

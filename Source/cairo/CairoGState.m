@@ -424,7 +424,7 @@ static inline CGFloat floatToUserSpace(NSAffineTransform *ctm, double d)
     }
 }
 
-- (void) GSShowText: (const char *)string : (size_t)length
+- (void) GSShowText: (const char *)string : (NSUInteger)length
 {
   if (_ct)
     {
@@ -444,7 +444,7 @@ static inline CGFloat floatToUserSpace(NSAffineTransform *ctm, double d)
     }
 }
 
-- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (size_t) length
+- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (NSUInteger) length
 {
   // FIXME: this method should just be a call to cairo_show_glyphs
   // FIXME: Currently advances is ignored
@@ -618,7 +618,7 @@ static inline CGFloat floatToUserSpace(NSAffineTransform *ctm, double d)
   if (_ct)
     {
       double doffset = doubleFromUserSpace(ctm, foffset);
-      int i;
+      NSInteger i;
       GS_BEGINITEMBUF(dpat, size, double);
 
       i = size;
@@ -628,7 +628,7 @@ static inline CGFloat floatToUserSpace(NSAffineTransform *ctm, double d)
           // FIXME: When using the correct values, some dashes look wrong
           dpat[i] = doubleFromUserSpace(ctm, pat[i]) * 1.4;
         }
-      cairo_set_dash(_ct, dpat, size, doffset);
+      cairo_set_dash(_ct, dpat, (int)size, doffset);
       GS_ENDITEMBUF();
     }
 }
@@ -1014,10 +1014,10 @@ _set_op(cairo_t *ct, NSCompositingOperation op)
   NSAffineTransformStruct tstruct;
   cairo_surface_t *surface;
   unsigned char	*tmp = NULL;
-  int i = 0;
-  int j;
-  int index;
-  unsigned int pixels = pixelsHigh * pixelsWide;
+  NSInteger i = 0;
+  NSInteger j;
+  NSInteger index;
+  NSUInteger pixels = pixelsHigh * pixelsWide;
   unsigned char *rowData;
   cairo_matrix_t local_matrix;
   cairo_status_t status;
@@ -1128,9 +1128,9 @@ _set_op(cairo_t *ct, NSCompositingOperation op)
 
   surface = cairo_image_surface_create_for_data((void*)tmp,
 						format,
-						pixelsWide,
-						pixelsHigh,
-						pixelsWide * 4);
+						(int)pixelsWide,
+						(int)pixelsHigh,
+						(int)pixelsWide * 4);
   status = cairo_surface_status(surface);
   if (status != CAIRO_STATUS_SUCCESS)
     {
@@ -1537,8 +1537,8 @@ doesn't support to use the receiver cairo target as the source. */
   if (_ct)
     {
       cairo_status_t status;
-      int i;
-      int stops = [gradient numberOfColorStops];
+      NSInteger i;
+      NSInteger stops = [gradient numberOfColorStops];
       NSPoint startP = [ctm transformPoint: startCenter];
       NSPoint endP = [ctm transformPoint: endCenter];
       cairo_pattern_t *cpattern = cairo_pattern_create_radial(startP.x, startP.y, 
@@ -1587,8 +1587,8 @@ doesn't support to use the receiver cairo target as the source. */
   if (_ct)
     {
       cairo_status_t status;
-      int i;
-      int stops = [gradient numberOfColorStops];
+      NSInteger i;
+      NSInteger stops = [gradient numberOfColorStops];
       NSPoint startP = [ctm transformPoint: startPoint];
       NSPoint endP = [ctm transformPoint: endPoint];
       cairo_pattern_t *cpattern = cairo_pattern_create_linear(startP.x, startP.y,
