@@ -72,9 +72,9 @@
 - (void) GSSetTextCTM: (NSAffineTransform *)ctm;
 - (void) GSSetTextDrawingMode: (GSTextDrawingMode)mode;
 - (void) GSSetTextPosition: (NSPoint)loc;
-- (void) GSShowText: (const char *)string : (size_t) length;
-- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (size_t) length;
-- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (size_t) length;
+- (void) GSShowText: (const char *)string : (NSUInteger) length;
+- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (NSUInteger) length;
+- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (NSUInteger) length;
 
 /* ----------------------------------------------------------------------- */
 /* Gstate operations */

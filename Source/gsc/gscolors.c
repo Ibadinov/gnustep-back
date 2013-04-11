@@ -41,14 +41,14 @@ gsMakeColor(device_color_t *dst, device_colorspace_t space, float a, float b, fl
   dst->field[3] = d;
 }
 
-void
+static void
 gsGrayToRGB(device_color_t  *color)
 {
   gsMakeColor(color, rgb_colorspace, color->field[0], color->field[0],
 	      color->field[0], 0);
 }
 
-void
+static void
 gsHSBToRGB(device_color_t  *color)
 {
   int i;
@@ -111,7 +111,7 @@ gsHSBToRGB(device_color_t  *color)
 }
 
 /* FIXME */   
-void
+static void
 gsCMYKToRGB(device_color_t  *color)
 {
   float c, m, y, k;

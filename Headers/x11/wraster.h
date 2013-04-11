@@ -79,11 +79,17 @@ extern "C" {
 /* standard colormap usage */
 #define RC_StandardColormap	(1<<7)
 
-    
-    
 
-    
-    
+#if __LP64__
+    typedef long RInteger;
+    typedef unsigned long RUInteger;
+#else
+    typedef int RInteger;
+    typedef unsigned int RUInteger;
+#endif
+
+
+
 /* std colormap usage/creation modes */
 enum {
     RUseStdColormap,		       /* default. fallbacks to RIgnore.. if 
@@ -97,7 +103,7 @@ enum {
 typedef struct RContextAttributes {
     int flags;
     int render_mode;
-    int colors_per_channel;	       /* for PseudoColor */
+    RInteger colors_per_channel;	       /* for PseudoColor */
     float rgamma;		       /* gamma correction for red, */
     float ggamma;		       /* green, */
     float bgamma;		       /* and blue */
@@ -115,7 +121,7 @@ typedef struct RContextAttributes {
  */
 typedef struct RContext {
     Display *dpy;
-    int screen_number;
+    RInteger screen_number;
     Colormap cmap;
     
     RContextAttributes *attribs;
@@ -140,7 +146,7 @@ typedef struct RContext {
     XStandardColormap *std_rgb_map;    /* standard RGB colormap */
     XStandardColormap *std_gray_map;   /* standard grayscale colormap */
     
-    int ncolors;		       /* total number of colors we can use */
+    RUInteger ncolors;		       /* total number of colors we can use */
     XColor *colors;		       /* internal colormap */
     unsigned long *pixels;	       /* RContext->colors[].pixel */
 
@@ -304,7 +310,7 @@ char *RGetImageFileFormat(char *file);
 /*
  * Xlib contexts
  */
-RContext *RCreateContext(Display *dpy, int screen_number,
+RContext *RCreateContext(Display *dpy, RInteger screen_number,
 			 RContextAttributes *attribs);
 
 void RDestroyContext(RContext *context);

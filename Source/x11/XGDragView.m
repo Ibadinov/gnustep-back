@@ -92,7 +92,7 @@ DndClass xdnd (void)
 
 
 Atom 
-GSActionForDragOperation(unsigned int op)
+GSActionForDragOperation(NSDragOperation op)
 {
   Atom xaction;
 
@@ -140,9 +140,9 @@ static inline
 Atom *
 mimeTypeForPasteboardType(Display *xDisplay, NSZone *zone, NSArray *types)
 {
-  Atom	*typelist;
-  int	count = [types count];
-  int	i;
+  Atom *typelist;
+  NSUInteger count = [types count];
+  NSUInteger i;
 
   typelist = NSZoneMalloc(zone, (count+1) * sizeof(Atom));
   for (i = 0; i < count; i++)
@@ -266,7 +266,7 @@ static	XGDragView	*sharedDragView = nil;
                     action: (NSDragOperation)action
                   position: (NSPoint)eventLocation
                  timestamp: (NSTimeInterval)time
-                  toWindow: (int)dWindowNumber
+                  toWindow: (NSInteger)dWindowNumber
 {
   switch (subtype)
     {
@@ -307,7 +307,7 @@ static	XGDragView	*sharedDragView = nil;
 
 
 - (NSWindow*) windowAcceptingDnDunder: (NSPoint)p
-			    windowRef: (int*)mouseWindowRef
+			    windowRef: (NSInteger *)mouseWindowRef
 {
   gswindow_device_t	*dwindev;
 
@@ -412,7 +412,7 @@ static	XGDragView	*sharedDragView = nil;
 
 - (void) _resetDragTypesForWindow: (NSWindow *)win
 {
-  int			winNum;
+  NSInteger             winNum;
   Atom			*typelist;
   gswindow_device_t	*window;
   NSCountedSet		*drag_set = [self dragTypesForWindow: win];
@@ -433,8 +433,8 @@ static	XGDragView	*sharedDragView = nil;
 
 - (BOOL) addDragTypes: (NSArray*)types toWindow: (NSWindow *)win
 {
-  BOOL	did_add;
-  int	winNum;
+  BOOL did_add;
+  NSInteger winNum;
 
   did_add = [super addDragTypes: types toWindow: win];
   /* Check if window device exists */
@@ -448,8 +448,8 @@ static	XGDragView	*sharedDragView = nil;
 
 - (BOOL) removeDragTypes: (NSArray*)types fromWindow: (NSWindow *)win
 {
-  BOOL	did_change;
-  int	winNum;
+  BOOL did_change;
+  NSInteger winNum;
 
   did_change = [super removeDragTypes: types fromWindow: win];
   /* Check if window device exists. */

@@ -109,11 +109,11 @@ static NSMapTable *gtable;
 - (void)DPSexecuserobject: (NSInteger)index;
 - (void)DPSundefineuserobject: (NSInteger)index;
 - (void)DPSclear;
-- (void)DPScopy: (int)n;
-- (void)DPScount: (int *)n;
+- (void)DPScopy: (NSInteger)n;
+- (void)DPScount: (NSInteger *)n;
 - (void)DPSdup;
 - (void)DPSexch;
-- (void)DPSindex: (int)i;
+- (void)DPSindex: (NSInteger)i;
 - (void)DPSpop;
 @end
 
@@ -154,18 +154,18 @@ static NSMapTable *gtable;
     }
 }
 
-+ (void) insertObject: (id)obj forKey: (int)index
++ (void) insertObject: (id)obj forKey: (NSInteger)index
 {
   NSMapInsert(gtable, (void *)(uintptr_t)index, obj);
 }
 
 
-+ (id) getObjectForKey: (int)index
++ (id) getObjectForKey: (NSInteger)index
 {
   return NSMapGet(gtable, (void *)(uintptr_t)index);
 }
 
-+ (void) removeObjectForKey: (int)index
++ (void) removeObjectForKey: (NSInteger)index
 {
   NSMapRemove(gtable, (void *)(uintptr_t)index);
 }
@@ -432,17 +432,17 @@ static NSMapTable *gtable;
   [gstate GSSetTextPosition: loc];
 }
 
-- (void) GSShowText: (const char *)string : (size_t) length
+- (void) GSShowText: (const char *)string : (NSUInteger) length
 {
   [gstate GSShowText: string : length];
 }
 
-- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (size_t) length
+- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (NSUInteger) length
 {
   [gstate GSShowGlyphs: glyphs : length];
 }
 
-- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (size_t) length
+- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (NSUInteger) length
 {
   [gstate GSShowGlyphsWithAdvances: glyphs : advances : length];
 }
@@ -1019,10 +1019,10 @@ static NSMapTable *gtable;
   GSIArrayInitWithZoneAndCapacity((GSIArray)opstack, [self zone], 2);
 }
 
-- (void)DPScopy: (int)n 
+- (void)DPScopy: (NSInteger)n 
 {
-  unsigned count = GSIArrayCount((GSIArray)opstack);
-  int i;
+  NSUInteger count = GSIArrayCount((GSIArray)opstack);
+  NSUInteger i;
 
   for (i = 0; i < n; i++)
     {
@@ -1032,7 +1032,7 @@ static NSMapTable *gtable;
     }
 }
 
-- (void)DPScount: (int *)n 
+- (void)DPScount: (NSInteger *)n 
 {
   CHECK_NULL_OUTPUT(n);
   *n = GSIArrayCount((GSIArray)opstack);
@@ -1047,7 +1047,7 @@ static NSMapTable *gtable;
 
 - (void)DPSexch 
 {
-  unsigned count = GSIArrayCount((GSIArray)opstack);
+  NSUInteger count = GSIArrayCount((GSIArray)opstack);
 
   if (count < 2)
     {
@@ -1061,7 +1061,7 @@ static NSMapTable *gtable;
 
 - (void)DPSindex: (int)i 
 {
-  unsigned count = GSIArrayCount((GSIArray)opstack);
+  NSUInteger count = GSIArrayCount((GSIArray)opstack);
   NSObject *obj = (GSIArrayItemAtIndex((GSIArray)opstack, count - i)).obj;
 
   ctxt_push(obj, opstack);

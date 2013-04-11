@@ -1,0 +1,994 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18FC95FD170223D300359B1C /* GSBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC94F01702236100359B1C /* GSBackend.m */; };
+		18FC95FE170223EE00359B1C /* GSContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC951F1702236100359B1C /* GSContext.m */; };
+		18FC95FF170223EE00359B1C /* GSFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95201702236100359B1C /* GSFunction.m */; };
+		18FC9600170223EE00359B1C /* GSGState.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95211702236100359B1C /* GSGState.m */; };
+		18FC9601170223EE00359B1C /* GSStreamContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95221702236100359B1C /* GSStreamContext.m */; };
+		18FC9602170223EE00359B1C /* GSStreamGState.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95231702236100359B1C /* GSStreamGState.m */; };
+		18FC9603170223EE00359B1C /* externs.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95241702236100359B1C /* externs.m */; };
+		18FC9604170223EE00359B1C /* gscolors.c in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95251702236100359B1C /* gscolors.c */; };
+		18FC9605170223FE00359B1C /* XGDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC953F1702236100359B1C /* XGDragView.m */; };
+		18FC9606170223FE00359B1C /* XGGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95401702236100359B1C /* XGGLContext.m */; };
+		18FC9607170223FE00359B1C /* XGGLFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95411702236100359B1C /* XGGLFormat.m */; };
+		18FC9608170223FE00359B1C /* XGServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95421702236100359B1C /* XGServer.m */; };
+		18FC9609170223FE00359B1C /* XGServerEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95431702236100359B1C /* XGServerEvent.m */; };
+		18FC960A170223FE00359B1C /* XGServerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95441702236100359B1C /* XGServerWindow.m */; };
+		18FC960B170223FE00359B1C /* XIMInputServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95451702236100359B1C /* XIMInputServer.m */; };
+		18FC960C170223FE00359B1C /* XWindowBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95461702236100359B1C /* XWindowBuffer.m */; };
+		18FC960D170223FE00359B1C /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95471702236100359B1C /* context.c */; };
+		18FC960E170223FE00359B1C /* convert.c in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95481702236100359B1C /* convert.c */; };
+		18FC960F170223FE00359B1C /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95491702236100359B1C /* raster.c */; };
+		18FC9610170223FE00359B1C /* scale.c in Sources */ = {isa = PBXBuildFile; fileRef = 18FC954A1702236100359B1C /* scale.c */; };
+		18FC9612170223FE00359B1C /* xdnd.c in Sources */ = {isa = PBXBuildFile; fileRef = 18FC954C1702236100359B1C /* xdnd.c */; };
+		18FC9613170223FE00359B1C /* xutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 18FC954D1702236100359B1C /* xutil.c */; };
+		18FC96201702242600359B1C /* GSXftFontInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95621702236100359B1C /* GSXftFontInfo.m */; };
+		18FC96211702242600359B1C /* XGBitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95631702236100359B1C /* XGBitmap.m */; };
+		18FC96221702242600359B1C /* XGCommonFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95641702236100359B1C /* XGCommonFont.m */; };
+		18FC96231702242600359B1C /* XGContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95651702236100359B1C /* XGContext.m */; };
+		18FC96241702242600359B1C /* XGFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95661702236100359B1C /* XGFont.m */; };
+		18FC96251702242600359B1C /* XGFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95671702236100359B1C /* XGFontManager.m */; };
+		18FC96261702242600359B1C /* XGFontSetFontInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95681702236100359B1C /* XGFontSetFontInfo.m */; };
+		18FC96271702242600359B1C /* XGGState.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC95691702236100359B1C /* XGGState.m */; };
+		18FC96281702242600359B1C /* XGGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC956A1702236100359B1C /* XGGeometry.m */; };
+		18FC96291702242600359B1C /* linking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC956B1702236100359B1C /* linking.m */; };
+		18FC962F170226DA00359B1C /* libXft.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC962E170226DA00359B1C /* libXft.2.dylib */; };
+		18FC9631170226F000359B1C /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC9630170226F000359B1C /* libfreetype.6.dylib */; };
+		18FC96331702270F00359B1C /* libz.1.2.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC96321702270F00359B1C /* libz.1.2.7.dylib */; };
+		18FC96351702272700359B1C /* libbz2.1.0.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC96341702272700359B1C /* libbz2.1.0.6.dylib */; };
+		18FC96371702273900359B1C /* libfontconfig.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC96361702273900359B1C /* libfontconfig.1.dylib */; };
+		18FC96391702274900359B1C /* libXext.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC96381702274900359B1C /* libXext.6.dylib */; };
+		18FC963B1702275800359B1C /* libXcursor.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC963A1702275800359B1C /* libXcursor.1.dylib */; };
+		18FC963D1702276B00359B1C /* libXfixes.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC963C1702276B00359B1C /* libXfixes.3.dylib */; };
+		18FC963F1702277A00359B1C /* libXmu.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC963E1702277A00359B1C /* libXmu.6.dylib */; };
+		18FC96411702278900359B1C /* libXt.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC96401702278900359B1C /* libXt.6.dylib */; };
+		18FC96431702279F00359B1C /* libX11.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC96421702279F00359B1C /* libX11.6.dylib */; };
+		18FC9645170227B600359B1C /* libgnustep-gui.0.23.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC9644170227B600359B1C /* libgnustep-gui.0.23.1.dylib */; };
+		18FC9647170227CD00359B1C /* libgnustep-base.1.24.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC9646170227CD00359B1C /* libgnustep-base.1.24.4.dylib */; };
+		18FC9649170227D900359B1C /* libobjc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FC9648170227D900359B1C /* libobjc.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		18FC94C91702225C00359B1C /* Backend.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Backend.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		18FC94CC1702225C00359B1C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		18FC94CF1702225C00359B1C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		18FC94D01702225C00359B1C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		18FC94D11702225C00359B1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		18FC94E61702232800359B1C /* Backend-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Backend-Info.plist"; path = "Support/Backend/Backend-Info.plist"; sourceTree = SOURCE_ROOT; };
+		18FC94E71702232800359B1C /* Backend-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Backend-Prefix.pch"; path = "Support/Backend/Backend-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		18FC94EA1702236100359B1C /* .cvsignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC94EC1702236100359B1C /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/nfontFaceNames.strings; sourceTree = "<group>"; };
+		18FC94ED1702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC94EE1702236100359B1C /* GNUmakefile.postamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.postamble; sourceTree = "<group>"; };
+		18FC94EF1702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC94F01702236100359B1C /* GSBackend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSBackend.m; sourceTree = "<group>"; };
+		18FC94F11702236100359B1C /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Swedish; path = Swedish.lproj/nfontFaceNames.strings; sourceTree = "<group>"; };
+		18FC94F31702236100359B1C /* .cvsignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC94F41702236100359B1C /* ARTContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTContext.m; sourceTree = "<group>"; };
+		18FC94F51702236100359B1C /* ARTGState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTGState.h; sourceTree = "<group>"; };
+		18FC94F61702236100359B1C /* ARTGState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTGState.m; sourceTree = "<group>"; };
+		18FC94F71702236100359B1C /* FTFaceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTFaceInfo.h; sourceTree = "<group>"; };
+		18FC94F81702236100359B1C /* FTFaceInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTFaceInfo.m; sourceTree = "<group>"; };
+		18FC94F91702236100359B1C /* FTFontEnumerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTFontEnumerator.h; sourceTree = "<group>"; };
+		18FC94FA1702236100359B1C /* FTFontEnumerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTFontEnumerator.m; sourceTree = "<group>"; };
+		18FC94FB1702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC94FC1702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC94FD1702236100359B1C /* ReadRect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadRect.m; sourceTree = "<group>"; };
+		18FC94FE1702236100359B1C /* blit-main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "blit-main.m"; sourceTree = "<group>"; };
+		18FC94FF1702236100359B1C /* blit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blit.h; sourceTree = "<group>"; };
+		18FC95001702236100359B1C /* blit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = blit.m; sourceTree = "<group>"; };
+		18FC95011702236100359B1C /* blit_scrapheap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = blit_scrapheap.m; sourceTree = "<group>"; };
+		18FC95021702236100359B1C /* composite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = composite.m; sourceTree = "<group>"; };
+		18FC95031702236100359B1C /* ftfont-old.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ftfont-old.m"; sourceTree = "<group>"; };
+		18FC95041702236100359B1C /* ftfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ftfont.h; sourceTree = "<group>"; };
+		18FC95051702236100359B1C /* ftfont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ftfont.m; sourceTree = "<group>"; };
+		18FC95061702236100359B1C /* image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = image.m; sourceTree = "<group>"; };
+		18FC95071702236100359B1C /* path.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = path.m; sourceTree = "<group>"; };
+		18FC95081702236100359B1C /* shfill.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = shfill.m; sourceTree = "<group>"; };
+		18FC950A1702236100359B1C /* CairoContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CairoContext.m; sourceTree = "<group>"; };
+		18FC950B1702236100359B1C /* CairoFaceInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CairoFaceInfo.m; sourceTree = "<group>"; };
+		18FC950C1702236100359B1C /* CairoFontEnumerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CairoFontEnumerator.m; sourceTree = "<group>"; };
+		18FC950D1702236100359B1C /* CairoFontInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CairoFontInfo.m; sourceTree = "<group>"; };
+		18FC950E1702236100359B1C /* CairoGState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CairoGState.m; sourceTree = "<group>"; };
+		18FC950F1702236100359B1C /* CairoPDFSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CairoPDFSurface.m; sourceTree = "<group>"; };
+		18FC95101702236100359B1C /* CairoPSSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CairoPSSurface.m; sourceTree = "<group>"; };
+		18FC95111702236100359B1C /* CairoSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CairoSurface.m; sourceTree = "<group>"; };
+		18FC95121702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC95131702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC95141702236100359B1C /* Win32CairoGState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Win32CairoGState.m; sourceTree = "<group>"; };
+		18FC95151702236100359B1C /* Win32CairoGlitzSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Win32CairoGlitzSurface.m; sourceTree = "<group>"; };
+		18FC95161702236100359B1C /* Win32CairoSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Win32CairoSurface.m; sourceTree = "<group>"; };
+		18FC95171702236100359B1C /* XGCairoGlitzSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGCairoGlitzSurface.m; sourceTree = "<group>"; };
+		18FC95181702236100359B1C /* XGCairoModernSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGCairoModernSurface.m; sourceTree = "<group>"; };
+		18FC95191702236100359B1C /* XGCairoSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGCairoSurface.m; sourceTree = "<group>"; };
+		18FC951A1702236100359B1C /* XGCairoXImageSurface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGCairoXImageSurface.m; sourceTree = "<group>"; };
+		18FC951C1702236100359B1C /* .cvsignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC951D1702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC951E1702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC951F1702236100359B1C /* GSContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSContext.m; sourceTree = "<group>"; };
+		18FC95201702236100359B1C /* GSFunction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSFunction.m; sourceTree = "<group>"; };
+		18FC95211702236100359B1C /* GSGState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSGState.m; sourceTree = "<group>"; };
+		18FC95221702236100359B1C /* GSStreamContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSStreamContext.m; sourceTree = "<group>"; };
+		18FC95231702236100359B1C /* GSStreamGState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSStreamGState.m; sourceTree = "<group>"; };
+		18FC95241702236100359B1C /* externs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = externs.m; sourceTree = "<group>"; };
+		18FC95251702236100359B1C /* gscolors.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gscolors.c; sourceTree = "<group>"; };
+		18FC95271702236100359B1C /* .cvsignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC95281702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC95291702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC952A1702236100359B1C /* WIN32Server.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WIN32Server.m; sourceTree = "<group>"; };
+		18FC952B1702236100359B1C /* w32_GLcontext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w32_GLcontext.m; sourceTree = "<group>"; };
+		18FC952C1702236100359B1C /* w32_GLformat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w32_GLformat.m; sourceTree = "<group>"; };
+		18FC952D1702236100359B1C /* w32_activate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w32_activate.m; sourceTree = "<group>"; };
+		18FC952E1702236100359B1C /* w32_create.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w32_create.m; sourceTree = "<group>"; };
+		18FC952F1702236100359B1C /* w32_general.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w32_general.m; sourceTree = "<group>"; };
+		18FC95301702236100359B1C /* w32_movesize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w32_movesize.m; sourceTree = "<group>"; };
+		18FC95311702236100359B1C /* w32_text_focus.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w32_text_focus.m; sourceTree = "<group>"; };
+		18FC95321702236100359B1C /* w32_windowdisplay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w32_windowdisplay.m; sourceTree = "<group>"; };
+		18FC95341702236100359B1C /* .cvsignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC95351702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC95361702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC95371702236100359B1C /* WIN32Context.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WIN32Context.m; sourceTree = "<group>"; };
+		18FC95381702236100359B1C /* WIN32FontEnumerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WIN32FontEnumerator.m; sourceTree = "<group>"; };
+		18FC95391702236100359B1C /* WIN32FontInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WIN32FontInfo.m; sourceTree = "<group>"; };
+		18FC953A1702236100359B1C /* WIN32GState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WIN32GState.m; sourceTree = "<group>"; };
+		18FC953C1702236100359B1C /* .cvsignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC953D1702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC953E1702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC953F1702236100359B1C /* XGDragView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGDragView.m; sourceTree = "<group>"; };
+		18FC95401702236100359B1C /* XGGLContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGGLContext.m; sourceTree = "<group>"; };
+		18FC95411702236100359B1C /* XGGLFormat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGGLFormat.m; sourceTree = "<group>"; };
+		18FC95421702236100359B1C /* XGServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGServer.m; sourceTree = "<group>"; };
+		18FC95431702236100359B1C /* XGServerEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGServerEvent.m; sourceTree = "<group>"; };
+		18FC95441702236100359B1C /* XGServerWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGServerWindow.m; sourceTree = "<group>"; };
+		18FC95451702236100359B1C /* XIMInputServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XIMInputServer.m; sourceTree = "<group>"; };
+		18FC95461702236100359B1C /* XWindowBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWindowBuffer.m; sourceTree = "<group>"; };
+		18FC95471702236100359B1C /* context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = context.c; sourceTree = "<group>"; };
+		18FC95481702236100359B1C /* convert.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = convert.c; sourceTree = "<group>"; };
+		18FC95491702236100359B1C /* raster.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = raster.c; sourceTree = "<group>"; };
+		18FC954A1702236100359B1C /* scale.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = scale.c; sourceTree = "<group>"; };
+		18FC954B1702236100359B1C /* wrasterP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wrasterP.h; sourceTree = "<group>"; };
+		18FC954C1702236100359B1C /* xdnd.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xdnd.c; sourceTree = "<group>"; };
+		18FC954D1702236100359B1C /* xutil.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xutil.c; sourceTree = "<group>"; };
+		18FC954F1702236100359B1C /* .cvsignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC95501702236100359B1C /* AFMFileFontInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFMFileFontInfo.h; sourceTree = "<group>"; };
+		18FC95511702236100359B1C /* AFMFileFontInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFMFileFontInfo.m; sourceTree = "<group>"; };
+		18FC95521702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC95531702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC95541702236100359B1C /* NSDPSContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDPSContext.m; sourceTree = "<group>"; };
+		18FC95551702236100359B1C /* NSDPSContextOps.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDPSContextOps.m; sourceTree = "<group>"; };
+		18FC95561702236100359B1C /* PXKEPSImageRep.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXKEPSImageRep.m; sourceTree = "<group>"; };
+		18FC95571702236100359B1C /* PXKFontManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXKFontManager.m; sourceTree = "<group>"; };
+		18FC95581702236100359B1C /* drawingfuncs.psw */ = {isa = PBXFileReference; lastKnownFileType = text; path = drawingfuncs.psw; sourceTree = "<group>"; };
+		18FC95591702236100359B1C /* extensions.psw */ = {isa = PBXFileReference; lastKnownFileType = text; path = extensions.psw; sourceTree = "<group>"; };
+		18FC955A1702236100359B1C /* fonts.psw */ = {isa = PBXFileReference; lastKnownFileType = text; path = fonts.psw; sourceTree = "<group>"; };
+		18FC955B1702236100359B1C /* general.psw */ = {isa = PBXFileReference; lastKnownFileType = text; path = general.psw; sourceTree = "<group>"; };
+		18FC955C1702236100359B1C /* parseAFM.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = parseAFM.c; sourceTree = "<group>"; };
+		18FC955D1702236100359B1C /* parseAFM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parseAFM.h; sourceTree = "<group>"; };
+		18FC955F1702236100359B1C /* .cvsignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC95601702236100359B1C /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC95611702236100359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC95621702236100359B1C /* GSXftFontInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSXftFontInfo.m; sourceTree = "<group>"; };
+		18FC95631702236100359B1C /* XGBitmap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGBitmap.m; sourceTree = "<group>"; };
+		18FC95641702236100359B1C /* XGCommonFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGCommonFont.m; sourceTree = "<group>"; };
+		18FC95651702236100359B1C /* XGContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGContext.m; sourceTree = "<group>"; };
+		18FC95661702236100359B1C /* XGFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGFont.m; sourceTree = "<group>"; };
+		18FC95671702236100359B1C /* XGFontManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGFontManager.m; sourceTree = "<group>"; };
+		18FC95681702236100359B1C /* XGFontSetFontInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGFontSetFontInfo.m; sourceTree = "<group>"; };
+		18FC95691702236100359B1C /* XGGState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGGState.m; sourceTree = "<group>"; };
+		18FC956A1702236100359B1C /* XGGeometry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGGeometry.m; sourceTree = "<group>"; };
+		18FC956B1702236100359B1C /* linking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = linking.m; sourceTree = "<group>"; };
+		18FC956D1702236900359B1C /* .cvsignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
+		18FC956E1702236900359B1C /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC956F1702236900359B1C /* GNUmakefile.postamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile.postamble; sourceTree = "<group>"; };
+		18FC95701702236900359B1C /* GNUmakefile.preamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		18FC95711702236900359B1C /* font_cacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = font_cacher.m; sourceTree = "<group>"; };
+		18FC95721702236900359B1C /* gpbs.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = gpbs.1; sourceTree = "<group>"; };
+		18FC95731702236900359B1C /* gpbs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gpbs.m; sourceTree = "<group>"; };
+		18FC95741702236900359B1C /* win32pbs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = win32pbs.m; sourceTree = "<group>"; };
+		18FC95751702236900359B1C /* xpbs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xpbs.m; sourceTree = "<group>"; };
+		18FC95811702237300359B1C /* ARTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARTContext.h; sourceTree = "<group>"; };
+		18FC95831702237300359B1C /* CairoContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CairoContext.h; sourceTree = "<group>"; };
+		18FC95841702237300359B1C /* CairoFaceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CairoFaceInfo.h; sourceTree = "<group>"; };
+		18FC95851702237300359B1C /* CairoFontEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CairoFontEnumerator.h; sourceTree = "<group>"; };
+		18FC95861702237300359B1C /* CairoFontInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CairoFontInfo.h; sourceTree = "<group>"; };
+		18FC95871702237300359B1C /* CairoGState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CairoGState.h; sourceTree = "<group>"; };
+		18FC95881702237300359B1C /* CairoPDFSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CairoPDFSurface.h; sourceTree = "<group>"; };
+		18FC95891702237300359B1C /* CairoPSSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CairoPSSurface.h; sourceTree = "<group>"; };
+		18FC958A1702237300359B1C /* CairoSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CairoSurface.h; sourceTree = "<group>"; };
+		18FC958B1702237300359B1C /* Win32CairoGState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Win32CairoGState.h; sourceTree = "<group>"; };
+		18FC958C1702237300359B1C /* Win32CairoGlitzSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Win32CairoGlitzSurface.h; sourceTree = "<group>"; };
+		18FC958D1702237300359B1C /* Win32CairoSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Win32CairoSurface.h; sourceTree = "<group>"; };
+		18FC958E1702237300359B1C /* XGCairoGlitzSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGCairoGlitzSurface.h; sourceTree = "<group>"; };
+		18FC958F1702237300359B1C /* XGCairoModernSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGCairoModernSurface.h; sourceTree = "<group>"; };
+		18FC95901702237300359B1C /* XGCairoSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGCairoSurface.h; sourceTree = "<group>"; };
+		18FC95911702237300359B1C /* XGCairoXImageSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGCairoXImageSurface.h; sourceTree = "<group>"; };
+		18FC95931702237300359B1C /* GSContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSContext.h; sourceTree = "<group>"; };
+		18FC95941702237300359B1C /* GSFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSFunction.h; sourceTree = "<group>"; };
+		18FC95951702237300359B1C /* GSGState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGState.h; sourceTree = "<group>"; };
+		18FC95961702237300359B1C /* GSGStateOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGStateOps.h; sourceTree = "<group>"; };
+		18FC95971702237300359B1C /* GSStreamContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSStreamContext.h; sourceTree = "<group>"; };
+		18FC95981702237300359B1C /* GSStreamGState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSStreamGState.h; sourceTree = "<group>"; };
+		18FC95991702237300359B1C /* gscolors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gscolors.h; sourceTree = "<group>"; };
+		18FC959B1702237300359B1C /* WIN32Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIN32Geometry.h; sourceTree = "<group>"; };
+		18FC959C1702237300359B1C /* WIN32OpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIN32OpenGL.h; sourceTree = "<group>"; };
+		18FC959D1702237300359B1C /* WIN32Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIN32Server.h; sourceTree = "<group>"; };
+		18FC959F1702237300359B1C /* WIN32Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIN32Context.h; sourceTree = "<group>"; };
+		18FC95A01702237300359B1C /* WIN32FontEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIN32FontEnumerator.h; sourceTree = "<group>"; };
+		18FC95A11702237300359B1C /* WIN32FontInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIN32FontInfo.h; sourceTree = "<group>"; };
+		18FC95A21702237300359B1C /* WIN32GState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIN32GState.h; sourceTree = "<group>"; };
+		18FC95A41702237300359B1C /* StdCmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StdCmap.h; sourceTree = "<group>"; };
+		18FC95A51702237300359B1C /* XGDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGDragView.h; sourceTree = "<group>"; };
+		18FC95A61702237300359B1C /* XGGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGGeneric.h; sourceTree = "<group>"; };
+		18FC95A71702237300359B1C /* XGInputServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGInputServer.h; sourceTree = "<group>"; };
+		18FC95A81702237300359B1C /* XGOpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGOpenGL.h; sourceTree = "<group>"; };
+		18FC95A91702237300359B1C /* XGServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGServer.h; sourceTree = "<group>"; };
+		18FC95AA1702237300359B1C /* XGServerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGServerWindow.h; sourceTree = "<group>"; };
+		18FC95AB1702237300359B1C /* XWindowBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWindowBuffer.h; sourceTree = "<group>"; };
+		18FC95AC1702237300359B1C /* wraster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wraster.h; sourceTree = "<group>"; };
+		18FC95AD1702237300359B1C /* xdnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xdnd.h; sourceTree = "<group>"; };
+		18FC95AF1702237300359B1C /* NSDPSContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDPSContext.h; sourceTree = "<group>"; };
+		18FC95B11702237300359B1C /* GSXftFontInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSXftFontInfo.h; sourceTree = "<group>"; };
+		18FC95B21702237300359B1C /* XGContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGContext.h; sourceTree = "<group>"; };
+		18FC95B31702237300359B1C /* XGFontSetFontInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGFontSetFontInfo.h; sourceTree = "<group>"; };
+		18FC95B41702237300359B1C /* XGGState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGGState.h; sourceTree = "<group>"; };
+		18FC95B51702237300359B1C /* XGGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGGeometry.h; sourceTree = "<group>"; };
+		18FC95B61702237300359B1C /* XGPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPrivate.h; sourceTree = "<group>"; };
+		18FC95B81702237D00359B1C /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
+		18FC95B91702237D00359B1C /* GNUmakefile.postamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile.postamble; sourceTree = "<group>"; };
+		18FC95BB1702237D00359B1C /* FontInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = FontInfo.plist; sourceTree = "<group>"; };
+		18FC95BC1702237D00359B1C /* n019003l.afm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = n019003l.afm; sourceTree = "<group>"; };
+		18FC95BD1702237D00359B1C /* n019003l.pfb */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019003l.pfb; sourceTree = "<group>"; };
+		18FC95BE1702237D00359B1C /* n019003l.pfm */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019003l.pfm; sourceTree = "<group>"; };
+		18FC95BF1702237D00359B1C /* n019004l.afm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = n019004l.afm; sourceTree = "<group>"; };
+		18FC95C01702237D00359B1C /* n019004l.pfb */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019004l.pfb; sourceTree = "<group>"; };
+		18FC95C11702237D00359B1C /* n019004l.pfm */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019004l.pfm; sourceTree = "<group>"; };
+		18FC95C21702237D00359B1C /* n019023l.afm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = n019023l.afm; sourceTree = "<group>"; };
+		18FC95C31702237D00359B1C /* n019023l.pfb */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019023l.pfb; sourceTree = "<group>"; };
+		18FC95C41702237D00359B1C /* n019023l.pfm */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019023l.pfm; sourceTree = "<group>"; };
+		18FC95C51702237D00359B1C /* n019024l.afm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = n019024l.afm; sourceTree = "<group>"; };
+		18FC95C61702237D00359B1C /* n019024l.pfb */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019024l.pfb; sourceTree = "<group>"; };
+		18FC95C71702237D00359B1C /* n019024l.pfm */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019024l.pfm; sourceTree = "<group>"; };
+		18FC95C81702237D00359B1C /* n019043l.afm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = n019043l.afm; sourceTree = "<group>"; };
+		18FC95C91702237D00359B1C /* n019043l.pfb */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019043l.pfb; sourceTree = "<group>"; };
+		18FC95CA1702237D00359B1C /* n019043l.pfm */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019043l.pfm; sourceTree = "<group>"; };
+		18FC95CB1702237D00359B1C /* n019044l.afm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = n019044l.afm; sourceTree = "<group>"; };
+		18FC95CC1702237D00359B1C /* n019044l.pfb */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019044l.pfb; sourceTree = "<group>"; };
+		18FC95CD1702237D00359B1C /* n019044l.pfm */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019044l.pfm; sourceTree = "<group>"; };
+		18FC95CE1702237D00359B1C /* n019063l.afm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = n019063l.afm; sourceTree = "<group>"; };
+		18FC95CF1702237D00359B1C /* n019063l.pfb */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019063l.pfb; sourceTree = "<group>"; };
+		18FC95D01702237D00359B1C /* n019063l.pfm */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019063l.pfm; sourceTree = "<group>"; };
+		18FC95D11702237D00359B1C /* n019064l.afm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = n019064l.afm; sourceTree = "<group>"; };
+		18FC95D21702237D00359B1C /* n019064l.pfb */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019064l.pfb; sourceTree = "<group>"; };
+		18FC95D31702237D00359B1C /* n019064l.pfm */ = {isa = PBXFileReference; lastKnownFileType = file; path = n019064l.pfm; sourceTree = "<group>"; };
+		18FC95EF1702239000359B1C /* configure */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = configure; sourceTree = SOURCE_ROOT; };
+		18FC95F01702239000359B1C /* configure.ac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = configure.ac; sourceTree = SOURCE_ROOT; };
+		18FC95F3170223B500359B1C /* back.make.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = back.make.in; sourceTree = SOURCE_ROOT; };
+		18FC95F4170223B500359B1C /* config.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.h.in; sourceTree = SOURCE_ROOT; };
+		18FC95F5170223B500359B1C /* config.make.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.make.in; sourceTree = SOURCE_ROOT; };
+		18FC95F6170223B500359B1C /* GNUmakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile; sourceTree = SOURCE_ROOT; };
+		18FC95F7170223B500359B1C /* GNUmakefile.postamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GNUmakefile.postamble; sourceTree = SOURCE_ROOT; };
+		18FC962E170226DA00359B1C /* libXft.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libXft.2.dylib; path = ../../../../opt/local/lib/libXft.2.dylib; sourceTree = "<group>"; };
+		18FC9630170226F000359B1C /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../../../../opt/local/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
+		18FC96321702270F00359B1C /* libz.1.2.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.7.dylib; path = ../../../../opt/local/lib/libz.1.2.7.dylib; sourceTree = "<group>"; };
+		18FC96341702272700359B1C /* libbz2.1.0.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.1.0.6.dylib; path = ../../../../opt/local/lib/libbz2.1.0.6.dylib; sourceTree = "<group>"; };
+		18FC96361702273900359B1C /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = ../../../../opt/local/lib/libfontconfig.1.dylib; sourceTree = "<group>"; };
+		18FC96381702274900359B1C /* libXext.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libXext.6.dylib; path = ../../../../opt/local/lib/libXext.6.dylib; sourceTree = "<group>"; };
+		18FC963A1702275800359B1C /* libXcursor.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libXcursor.1.dylib; path = ../../../../opt/local/lib/libXcursor.1.dylib; sourceTree = "<group>"; };
+		18FC963C1702276B00359B1C /* libXfixes.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libXfixes.3.dylib; path = ../../../../opt/local/lib/libXfixes.3.dylib; sourceTree = "<group>"; };
+		18FC963E1702277A00359B1C /* libXmu.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libXmu.6.dylib; path = ../../../../opt/local/lib/libXmu.6.dylib; sourceTree = "<group>"; };
+		18FC96401702278900359B1C /* libXt.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libXt.6.dylib; path = ../../../../opt/local/lib/libXt.6.dylib; sourceTree = "<group>"; };
+		18FC96421702279F00359B1C /* libX11.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libX11.6.dylib; path = ../../../../opt/local/lib/libX11.6.dylib; sourceTree = "<group>"; };
+		18FC9644170227B600359B1C /* libgnustep-gui.0.23.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgnustep-gui.0.23.1.dylib"; path = "../../../../usr/GNUstep/Local/Library/Libraries/libgnustep-gui.0.23.1.dylib"; sourceTree = "<group>"; };
+		18FC9646170227CD00359B1C /* libgnustep-base.1.24.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgnustep-base.1.24.4.dylib"; path = "../../../../usr/GNUstep/Local/Library/Libraries/libgnustep-base.1.24.4.dylib"; sourceTree = "<group>"; };
+		18FC9648170227D900359B1C /* libobjc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.dylib; path = usr/lib/libobjc.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18FC94C61702225C00359B1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18FC9649170227D900359B1C /* libobjc.dylib in Frameworks */,
+				18FC9647170227CD00359B1C /* libgnustep-base.1.24.4.dylib in Frameworks */,
+				18FC9645170227B600359B1C /* libgnustep-gui.0.23.1.dylib in Frameworks */,
+				18FC96431702279F00359B1C /* libX11.6.dylib in Frameworks */,
+				18FC96411702278900359B1C /* libXt.6.dylib in Frameworks */,
+				18FC963F1702277A00359B1C /* libXmu.6.dylib in Frameworks */,
+				18FC963D1702276B00359B1C /* libXfixes.3.dylib in Frameworks */,
+				18FC963B1702275800359B1C /* libXcursor.1.dylib in Frameworks */,
+				18FC96391702274900359B1C /* libXext.6.dylib in Frameworks */,
+				18FC96371702273900359B1C /* libfontconfig.1.dylib in Frameworks */,
+				18FC96351702272700359B1C /* libbz2.1.0.6.dylib in Frameworks */,
+				18FC96331702270F00359B1C /* libz.1.2.7.dylib in Frameworks */,
+				18FC9631170226F000359B1C /* libfreetype.6.dylib in Frameworks */,
+				18FC962F170226DA00359B1C /* libXft.2.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18FC94BE1702225C00359B1C = {
+			isa = PBXGroup;
+			children = (
+				18FC9648170227D900359B1C /* libobjc.dylib */,
+				18FC9646170227CD00359B1C /* libgnustep-base.1.24.4.dylib */,
+				18FC9644170227B600359B1C /* libgnustep-gui.0.23.1.dylib */,
+				18FC96421702279F00359B1C /* libX11.6.dylib */,
+				18FC96401702278900359B1C /* libXt.6.dylib */,
+				18FC963E1702277A00359B1C /* libXmu.6.dylib */,
+				18FC963C1702276B00359B1C /* libXfixes.3.dylib */,
+				18FC963A1702275800359B1C /* libXcursor.1.dylib */,
+				18FC96381702274900359B1C /* libXext.6.dylib */,
+				18FC96361702273900359B1C /* libfontconfig.1.dylib */,
+				18FC96341702272700359B1C /* libbz2.1.0.6.dylib */,
+				18FC96321702270F00359B1C /* libz.1.2.7.dylib */,
+				18FC9630170226F000359B1C /* libfreetype.6.dylib */,
+				18FC962E170226DA00359B1C /* libXft.2.dylib */,
+				18FC94D21702225C00359B1C /* Backend */,
+				18FC94CB1702225C00359B1C /* Frameworks */,
+				18FC94CA1702225C00359B1C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18FC94CA1702225C00359B1C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18FC94C91702225C00359B1C /* Backend.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18FC94CB1702225C00359B1C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18FC94CC1702225C00359B1C /* Cocoa.framework */,
+				18FC94CE1702225C00359B1C /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18FC94CE1702225C00359B1C /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18FC94CF1702225C00359B1C /* AppKit.framework */,
+				18FC94D01702225C00359B1C /* CoreData.framework */,
+				18FC94D11702225C00359B1C /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		18FC94D21702225C00359B1C /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95B71702237D00359B1C /* Fonts */,
+				18FC957F1702237300359B1C /* Headers */,
+				18FC94E91702236100359B1C /* Source */,
+				18FC956C1702236900359B1C /* Tools */,
+				18FC94D31702225C00359B1C /* Supporting Files */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
+		18FC94D31702225C00359B1C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95F3170223B500359B1C /* back.make.in */,
+				18FC95F4170223B500359B1C /* config.h.in */,
+				18FC95F5170223B500359B1C /* config.make.in */,
+				18FC95F6170223B500359B1C /* GNUmakefile */,
+				18FC95F7170223B500359B1C /* GNUmakefile.postamble */,
+				18FC95EF1702239000359B1C /* configure */,
+				18FC95F01702239000359B1C /* configure.ac */,
+				18FC94E61702232800359B1C /* Backend-Info.plist */,
+				18FC94E71702232800359B1C /* Backend-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18FC94E91702236100359B1C /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				18FC94EA1702236100359B1C /* .cvsignore */,
+				18FC94EB1702236100359B1C /* nfontFaceNames.strings */,
+				18FC94ED1702236100359B1C /* GNUmakefile */,
+				18FC94EE1702236100359B1C /* GNUmakefile.postamble */,
+				18FC94EF1702236100359B1C /* GNUmakefile.preamble */,
+				18FC94F01702236100359B1C /* GSBackend.m */,
+				18FC94F21702236100359B1C /* art */,
+				18FC95091702236100359B1C /* cairo */,
+				18FC951B1702236100359B1C /* gsc */,
+				18FC95261702236100359B1C /* win32 */,
+				18FC95331702236100359B1C /* winlib */,
+				18FC953B1702236100359B1C /* x11 */,
+				18FC954E1702236100359B1C /* xdps */,
+				18FC955E1702236100359B1C /* xlib */,
+			);
+			path = Source;
+			sourceTree = SOURCE_ROOT;
+		};
+		18FC94F21702236100359B1C /* art */ = {
+			isa = PBXGroup;
+			children = (
+				18FC94F31702236100359B1C /* .cvsignore */,
+				18FC94F41702236100359B1C /* ARTContext.m */,
+				18FC94F51702236100359B1C /* ARTGState.h */,
+				18FC94F61702236100359B1C /* ARTGState.m */,
+				18FC94F71702236100359B1C /* FTFaceInfo.h */,
+				18FC94F81702236100359B1C /* FTFaceInfo.m */,
+				18FC94F91702236100359B1C /* FTFontEnumerator.h */,
+				18FC94FA1702236100359B1C /* FTFontEnumerator.m */,
+				18FC94FB1702236100359B1C /* GNUmakefile */,
+				18FC94FC1702236100359B1C /* GNUmakefile.preamble */,
+				18FC94FD1702236100359B1C /* ReadRect.m */,
+				18FC94FE1702236100359B1C /* blit-main.m */,
+				18FC94FF1702236100359B1C /* blit.h */,
+				18FC95001702236100359B1C /* blit.m */,
+				18FC95011702236100359B1C /* blit_scrapheap.m */,
+				18FC95021702236100359B1C /* composite.m */,
+				18FC95031702236100359B1C /* ftfont-old.m */,
+				18FC95041702236100359B1C /* ftfont.h */,
+				18FC95051702236100359B1C /* ftfont.m */,
+				18FC95061702236100359B1C /* image.m */,
+				18FC95071702236100359B1C /* path.m */,
+				18FC95081702236100359B1C /* shfill.m */,
+			);
+			path = art;
+			sourceTree = "<group>";
+		};
+		18FC95091702236100359B1C /* cairo */ = {
+			isa = PBXGroup;
+			children = (
+				18FC950A1702236100359B1C /* CairoContext.m */,
+				18FC950B1702236100359B1C /* CairoFaceInfo.m */,
+				18FC950C1702236100359B1C /* CairoFontEnumerator.m */,
+				18FC950D1702236100359B1C /* CairoFontInfo.m */,
+				18FC950E1702236100359B1C /* CairoGState.m */,
+				18FC950F1702236100359B1C /* CairoPDFSurface.m */,
+				18FC95101702236100359B1C /* CairoPSSurface.m */,
+				18FC95111702236100359B1C /* CairoSurface.m */,
+				18FC95121702236100359B1C /* GNUmakefile */,
+				18FC95131702236100359B1C /* GNUmakefile.preamble */,
+				18FC95141702236100359B1C /* Win32CairoGState.m */,
+				18FC95151702236100359B1C /* Win32CairoGlitzSurface.m */,
+				18FC95161702236100359B1C /* Win32CairoSurface.m */,
+				18FC95171702236100359B1C /* XGCairoGlitzSurface.m */,
+				18FC95181702236100359B1C /* XGCairoModernSurface.m */,
+				18FC95191702236100359B1C /* XGCairoSurface.m */,
+				18FC951A1702236100359B1C /* XGCairoXImageSurface.m */,
+			);
+			path = cairo;
+			sourceTree = "<group>";
+		};
+		18FC951B1702236100359B1C /* gsc */ = {
+			isa = PBXGroup;
+			children = (
+				18FC951C1702236100359B1C /* .cvsignore */,
+				18FC951D1702236100359B1C /* GNUmakefile */,
+				18FC951E1702236100359B1C /* GNUmakefile.preamble */,
+				18FC951F1702236100359B1C /* GSContext.m */,
+				18FC95201702236100359B1C /* GSFunction.m */,
+				18FC95211702236100359B1C /* GSGState.m */,
+				18FC95221702236100359B1C /* GSStreamContext.m */,
+				18FC95231702236100359B1C /* GSStreamGState.m */,
+				18FC95241702236100359B1C /* externs.m */,
+				18FC95251702236100359B1C /* gscolors.c */,
+			);
+			path = gsc;
+			sourceTree = "<group>";
+		};
+		18FC95261702236100359B1C /* win32 */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95271702236100359B1C /* .cvsignore */,
+				18FC95281702236100359B1C /* GNUmakefile */,
+				18FC95291702236100359B1C /* GNUmakefile.preamble */,
+				18FC952A1702236100359B1C /* WIN32Server.m */,
+				18FC952B1702236100359B1C /* w32_GLcontext.m */,
+				18FC952C1702236100359B1C /* w32_GLformat.m */,
+				18FC952D1702236100359B1C /* w32_activate.m */,
+				18FC952E1702236100359B1C /* w32_create.m */,
+				18FC952F1702236100359B1C /* w32_general.m */,
+				18FC95301702236100359B1C /* w32_movesize.m */,
+				18FC95311702236100359B1C /* w32_text_focus.m */,
+				18FC95321702236100359B1C /* w32_windowdisplay.m */,
+			);
+			path = win32;
+			sourceTree = "<group>";
+		};
+		18FC95331702236100359B1C /* winlib */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95341702236100359B1C /* .cvsignore */,
+				18FC95351702236100359B1C /* GNUmakefile */,
+				18FC95361702236100359B1C /* GNUmakefile.preamble */,
+				18FC95371702236100359B1C /* WIN32Context.m */,
+				18FC95381702236100359B1C /* WIN32FontEnumerator.m */,
+				18FC95391702236100359B1C /* WIN32FontInfo.m */,
+				18FC953A1702236100359B1C /* WIN32GState.m */,
+			);
+			path = winlib;
+			sourceTree = "<group>";
+		};
+		18FC953B1702236100359B1C /* x11 */ = {
+			isa = PBXGroup;
+			children = (
+				18FC953C1702236100359B1C /* .cvsignore */,
+				18FC953D1702236100359B1C /* GNUmakefile */,
+				18FC953E1702236100359B1C /* GNUmakefile.preamble */,
+				18FC953F1702236100359B1C /* XGDragView.m */,
+				18FC95401702236100359B1C /* XGGLContext.m */,
+				18FC95411702236100359B1C /* XGGLFormat.m */,
+				18FC95421702236100359B1C /* XGServer.m */,
+				18FC95431702236100359B1C /* XGServerEvent.m */,
+				18FC95441702236100359B1C /* XGServerWindow.m */,
+				18FC95451702236100359B1C /* XIMInputServer.m */,
+				18FC95461702236100359B1C /* XWindowBuffer.m */,
+				18FC95471702236100359B1C /* context.c */,
+				18FC95481702236100359B1C /* convert.c */,
+				18FC95491702236100359B1C /* raster.c */,
+				18FC954A1702236100359B1C /* scale.c */,
+				18FC954B1702236100359B1C /* wrasterP.h */,
+				18FC954C1702236100359B1C /* xdnd.c */,
+				18FC954D1702236100359B1C /* xutil.c */,
+			);
+			path = x11;
+			sourceTree = "<group>";
+		};
+		18FC954E1702236100359B1C /* xdps */ = {
+			isa = PBXGroup;
+			children = (
+				18FC954F1702236100359B1C /* .cvsignore */,
+				18FC95501702236100359B1C /* AFMFileFontInfo.h */,
+				18FC95511702236100359B1C /* AFMFileFontInfo.m */,
+				18FC95521702236100359B1C /* GNUmakefile */,
+				18FC95531702236100359B1C /* GNUmakefile.preamble */,
+				18FC95541702236100359B1C /* NSDPSContext.m */,
+				18FC95551702236100359B1C /* NSDPSContextOps.m */,
+				18FC95561702236100359B1C /* PXKEPSImageRep.m */,
+				18FC95571702236100359B1C /* PXKFontManager.m */,
+				18FC95581702236100359B1C /* drawingfuncs.psw */,
+				18FC95591702236100359B1C /* extensions.psw */,
+				18FC955A1702236100359B1C /* fonts.psw */,
+				18FC955B1702236100359B1C /* general.psw */,
+				18FC955C1702236100359B1C /* parseAFM.c */,
+				18FC955D1702236100359B1C /* parseAFM.h */,
+			);
+			path = xdps;
+			sourceTree = "<group>";
+		};
+		18FC955E1702236100359B1C /* xlib */ = {
+			isa = PBXGroup;
+			children = (
+				18FC955F1702236100359B1C /* .cvsignore */,
+				18FC95601702236100359B1C /* GNUmakefile */,
+				18FC95611702236100359B1C /* GNUmakefile.preamble */,
+				18FC95621702236100359B1C /* GSXftFontInfo.m */,
+				18FC95631702236100359B1C /* XGBitmap.m */,
+				18FC95641702236100359B1C /* XGCommonFont.m */,
+				18FC95651702236100359B1C /* XGContext.m */,
+				18FC95661702236100359B1C /* XGFont.m */,
+				18FC95671702236100359B1C /* XGFontManager.m */,
+				18FC95681702236100359B1C /* XGFontSetFontInfo.m */,
+				18FC95691702236100359B1C /* XGGState.m */,
+				18FC956A1702236100359B1C /* XGGeometry.m */,
+				18FC956B1702236100359B1C /* linking.m */,
+			);
+			path = xlib;
+			sourceTree = "<group>";
+		};
+		18FC956C1702236900359B1C /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				18FC956D1702236900359B1C /* .cvsignore */,
+				18FC956E1702236900359B1C /* GNUmakefile */,
+				18FC956F1702236900359B1C /* GNUmakefile.postamble */,
+				18FC95701702236900359B1C /* GNUmakefile.preamble */,
+				18FC95711702236900359B1C /* font_cacher.m */,
+				18FC95721702236900359B1C /* gpbs.1 */,
+				18FC95731702236900359B1C /* gpbs.m */,
+				18FC95741702236900359B1C /* win32pbs.m */,
+				18FC95751702236900359B1C /* xpbs.m */,
+			);
+			path = Tools;
+			sourceTree = SOURCE_ROOT;
+		};
+		18FC957F1702237300359B1C /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95801702237300359B1C /* art */,
+				18FC95821702237300359B1C /* cairo */,
+				18FC95921702237300359B1C /* gsc */,
+				18FC959A1702237300359B1C /* win32 */,
+				18FC959E1702237300359B1C /* winlib */,
+				18FC95A31702237300359B1C /* x11 */,
+				18FC95AE1702237300359B1C /* xdps */,
+				18FC95B01702237300359B1C /* xlib */,
+			);
+			path = Headers;
+			sourceTree = SOURCE_ROOT;
+		};
+		18FC95801702237300359B1C /* art */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95811702237300359B1C /* ARTContext.h */,
+			);
+			path = art;
+			sourceTree = "<group>";
+		};
+		18FC95821702237300359B1C /* cairo */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95831702237300359B1C /* CairoContext.h */,
+				18FC95841702237300359B1C /* CairoFaceInfo.h */,
+				18FC95851702237300359B1C /* CairoFontEnumerator.h */,
+				18FC95861702237300359B1C /* CairoFontInfo.h */,
+				18FC95871702237300359B1C /* CairoGState.h */,
+				18FC95881702237300359B1C /* CairoPDFSurface.h */,
+				18FC95891702237300359B1C /* CairoPSSurface.h */,
+				18FC958A1702237300359B1C /* CairoSurface.h */,
+				18FC958B1702237300359B1C /* Win32CairoGState.h */,
+				18FC958C1702237300359B1C /* Win32CairoGlitzSurface.h */,
+				18FC958D1702237300359B1C /* Win32CairoSurface.h */,
+				18FC958E1702237300359B1C /* XGCairoGlitzSurface.h */,
+				18FC958F1702237300359B1C /* XGCairoModernSurface.h */,
+				18FC95901702237300359B1C /* XGCairoSurface.h */,
+				18FC95911702237300359B1C /* XGCairoXImageSurface.h */,
+			);
+			path = cairo;
+			sourceTree = "<group>";
+		};
+		18FC95921702237300359B1C /* gsc */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95931702237300359B1C /* GSContext.h */,
+				18FC95941702237300359B1C /* GSFunction.h */,
+				18FC95951702237300359B1C /* GSGState.h */,
+				18FC95961702237300359B1C /* GSGStateOps.h */,
+				18FC95971702237300359B1C /* GSStreamContext.h */,
+				18FC95981702237300359B1C /* GSStreamGState.h */,
+				18FC95991702237300359B1C /* gscolors.h */,
+			);
+			path = gsc;
+			sourceTree = "<group>";
+		};
+		18FC959A1702237300359B1C /* win32 */ = {
+			isa = PBXGroup;
+			children = (
+				18FC959B1702237300359B1C /* WIN32Geometry.h */,
+				18FC959C1702237300359B1C /* WIN32OpenGL.h */,
+				18FC959D1702237300359B1C /* WIN32Server.h */,
+			);
+			path = win32;
+			sourceTree = "<group>";
+		};
+		18FC959E1702237300359B1C /* winlib */ = {
+			isa = PBXGroup;
+			children = (
+				18FC959F1702237300359B1C /* WIN32Context.h */,
+				18FC95A01702237300359B1C /* WIN32FontEnumerator.h */,
+				18FC95A11702237300359B1C /* WIN32FontInfo.h */,
+				18FC95A21702237300359B1C /* WIN32GState.h */,
+			);
+			path = winlib;
+			sourceTree = "<group>";
+		};
+		18FC95A31702237300359B1C /* x11 */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95A41702237300359B1C /* StdCmap.h */,
+				18FC95A51702237300359B1C /* XGDragView.h */,
+				18FC95A61702237300359B1C /* XGGeneric.h */,
+				18FC95A71702237300359B1C /* XGInputServer.h */,
+				18FC95A81702237300359B1C /* XGOpenGL.h */,
+				18FC95A91702237300359B1C /* XGServer.h */,
+				18FC95AA1702237300359B1C /* XGServerWindow.h */,
+				18FC95AB1702237300359B1C /* XWindowBuffer.h */,
+				18FC95AC1702237300359B1C /* wraster.h */,
+				18FC95AD1702237300359B1C /* xdnd.h */,
+			);
+			path = x11;
+			sourceTree = "<group>";
+		};
+		18FC95AE1702237300359B1C /* xdps */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95AF1702237300359B1C /* NSDPSContext.h */,
+			);
+			path = xdps;
+			sourceTree = "<group>";
+		};
+		18FC95B01702237300359B1C /* xlib */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95B11702237300359B1C /* GSXftFontInfo.h */,
+				18FC95B21702237300359B1C /* XGContext.h */,
+				18FC95B31702237300359B1C /* XGFontSetFontInfo.h */,
+				18FC95B41702237300359B1C /* XGGState.h */,
+				18FC95B51702237300359B1C /* XGGeometry.h */,
+				18FC95B61702237300359B1C /* XGPrivate.h */,
+			);
+			path = xlib;
+			sourceTree = "<group>";
+		};
+		18FC95B71702237D00359B1C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95B81702237D00359B1C /* GNUmakefile */,
+				18FC95B91702237D00359B1C /* GNUmakefile.postamble */,
+				18FC95BA1702237D00359B1C /* Helvetica.nfont */,
+			);
+			path = Fonts;
+			sourceTree = SOURCE_ROOT;
+		};
+		18FC95BA1702237D00359B1C /* Helvetica.nfont */ = {
+			isa = PBXGroup;
+			children = (
+				18FC95BB1702237D00359B1C /* FontInfo.plist */,
+				18FC95BC1702237D00359B1C /* n019003l.afm */,
+				18FC95BD1702237D00359B1C /* n019003l.pfb */,
+				18FC95BE1702237D00359B1C /* n019003l.pfm */,
+				18FC95BF1702237D00359B1C /* n019004l.afm */,
+				18FC95C01702237D00359B1C /* n019004l.pfb */,
+				18FC95C11702237D00359B1C /* n019004l.pfm */,
+				18FC95C21702237D00359B1C /* n019023l.afm */,
+				18FC95C31702237D00359B1C /* n019023l.pfb */,
+				18FC95C41702237D00359B1C /* n019023l.pfm */,
+				18FC95C51702237D00359B1C /* n019024l.afm */,
+				18FC95C61702237D00359B1C /* n019024l.pfb */,
+				18FC95C71702237D00359B1C /* n019024l.pfm */,
+				18FC95C81702237D00359B1C /* n019043l.afm */,
+				18FC95C91702237D00359B1C /* n019043l.pfb */,
+				18FC95CA1702237D00359B1C /* n019043l.pfm */,
+				18FC95CB1702237D00359B1C /* n019044l.afm */,
+				18FC95CC1702237D00359B1C /* n019044l.pfb */,
+				18FC95CD1702237D00359B1C /* n019044l.pfm */,
+				18FC95CE1702237D00359B1C /* n019063l.afm */,
+				18FC95CF1702237D00359B1C /* n019063l.pfb */,
+				18FC95D01702237D00359B1C /* n019063l.pfm */,
+				18FC95D11702237D00359B1C /* n019064l.afm */,
+				18FC95D21702237D00359B1C /* n019064l.pfb */,
+				18FC95D31702237D00359B1C /* n019064l.pfm */,
+			);
+			path = Helvetica.nfont;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18FC94C81702225C00359B1C /* Backend */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18FC94DB1702225C00359B1C /* Build configuration list for PBXNativeTarget "Backend" */;
+			buildPhases = (
+				18FC94C51702225C00359B1C /* Sources */,
+				18FC94C61702225C00359B1C /* Frameworks */,
+				18FC94C71702225C00359B1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Backend;
+			productName = Backend;
+			productReference = 18FC94C91702225C00359B1C /* Backend.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18FC94C01702225C00359B1C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 18FC94C31702225C00359B1C /* Build configuration list for PBXProject "Backend" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				English,
+				Swedish,
+			);
+			mainGroup = 18FC94BE1702225C00359B1C;
+			productRefGroup = 18FC94CA1702225C00359B1C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18FC94C81702225C00359B1C /* Backend */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18FC94C71702225C00359B1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18FC94C51702225C00359B1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18FC95FD170223D300359B1C /* GSBackend.m in Sources */,
+				18FC95FE170223EE00359B1C /* GSContext.m in Sources */,
+				18FC95FF170223EE00359B1C /* GSFunction.m in Sources */,
+				18FC9600170223EE00359B1C /* GSGState.m in Sources */,
+				18FC9601170223EE00359B1C /* GSStreamContext.m in Sources */,
+				18FC9602170223EE00359B1C /* GSStreamGState.m in Sources */,
+				18FC9603170223EE00359B1C /* externs.m in Sources */,
+				18FC9604170223EE00359B1C /* gscolors.c in Sources */,
+				18FC9605170223FE00359B1C /* XGDragView.m in Sources */,
+				18FC9606170223FE00359B1C /* XGGLContext.m in Sources */,
+				18FC9607170223FE00359B1C /* XGGLFormat.m in Sources */,
+				18FC9608170223FE00359B1C /* XGServer.m in Sources */,
+				18FC9609170223FE00359B1C /* XGServerEvent.m in Sources */,
+				18FC960A170223FE00359B1C /* XGServerWindow.m in Sources */,
+				18FC960B170223FE00359B1C /* XIMInputServer.m in Sources */,
+				18FC960C170223FE00359B1C /* XWindowBuffer.m in Sources */,
+				18FC960D170223FE00359B1C /* context.c in Sources */,
+				18FC960E170223FE00359B1C /* convert.c in Sources */,
+				18FC960F170223FE00359B1C /* raster.c in Sources */,
+				18FC9610170223FE00359B1C /* scale.c in Sources */,
+				18FC9612170223FE00359B1C /* xdnd.c in Sources */,
+				18FC9613170223FE00359B1C /* xutil.c in Sources */,
+				18FC96201702242600359B1C /* GSXftFontInfo.m in Sources */,
+				18FC96211702242600359B1C /* XGBitmap.m in Sources */,
+				18FC96221702242600359B1C /* XGCommonFont.m in Sources */,
+				18FC96231702242600359B1C /* XGContext.m in Sources */,
+				18FC96241702242600359B1C /* XGFont.m in Sources */,
+				18FC96251702242600359B1C /* XGFontManager.m in Sources */,
+				18FC96261702242600359B1C /* XGFontSetFontInfo.m in Sources */,
+				18FC96271702242600359B1C /* XGGState.m in Sources */,
+				18FC96281702242600359B1C /* XGGeometry.m in Sources */,
+				18FC96291702242600359B1C /* linking.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18FC94EB1702236100359B1C /* nfontFaceNames.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18FC94EC1702236100359B1C /* English */,
+				18FC94F11702236100359B1C /* Swedish */,
+			);
+			name = nfontFaceNames.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18FC94D91702225C00359B1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		18FC94DA1702225C00359B1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		18FC94DC1702225C00359B1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "Support/Backend/Backend-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					/opt/local/include,
+					/usr/GNUstep/Local/Library/Headers,
+					"$(SRCROOT)/Headers",
+					"$(SRCROOT)/Source",
+					"$(SRCROOT)",
+				);
+				INFOPLIST_FILE = "Support/Backend/Backend-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LIBRARY_SEARCH_PATHS = (
+					/opt/local/lib,
+					/usr/GNUstep/Local/Library/Libraries,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = /opt/local/include/freetype2;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		18FC94DD1702225C00359B1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "Support/Backend/Backend-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					/opt/local/include,
+					/usr/GNUstep/Local/Library/Headers,
+					"$(SRCROOT)/Headers",
+					"$(SRCROOT)/Source",
+					"$(SRCROOT)",
+				);
+				INFOPLIST_FILE = "Support/Backend/Backend-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LIBRARY_SEARCH_PATHS = (
+					/opt/local/lib,
+					/usr/GNUstep/Local/Library/Libraries,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = /opt/local/include/freetype2;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18FC94C31702225C00359B1C /* Build configuration list for PBXProject "Backend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18FC94D91702225C00359B1C /* Debug */,
+				18FC94DA1702225C00359B1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18FC94DB1702225C00359B1C /* Build configuration list for PBXNativeTarget "Backend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18FC94DC1702225C00359B1C /* Debug */,
+				18FC94DD1702225C00359B1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18FC94C01702225C00359B1C /* Project object */;
+}

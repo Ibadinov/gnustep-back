@@ -98,7 +98,7 @@
 #define CSIZE 16384
 #define GS_QUERY_COLOR(color)					\
   do {								\
-    int centry = color.pixel % CSIZE;				\
+    unsigned long centry = color.pixel % CSIZE;                 \
     if (empty[centry] == NO && pixels[centry] == color.pixel)	\
       {								\
 	color = colors[centry];					\
@@ -399,8 +399,8 @@ struct _bitmap_decompose {
 static int
 _get_bit_value(unsigned char *base, long msb_off, int bit_width)
 {
-  long lsb_off, byte1, byte2;
-  int shift, value;
+  long lsb_off, byte1, byte2, shift;
+  int value;
 
   /*
    * Firstly we calculate the position of the msb and lsb in terms
@@ -699,10 +699,10 @@ _set_ranges(long src_len, long dst_len,
 int
 _bitmap_combine_alpha(RContext *context,
 		unsigned char * data_planes[5],
-		int width, int height,
-		int bits_per_sample, int samples_per_pixel,
-		int bits_per_pixel, int bytes_per_row,
-		int colour_space, BOOL one_is_black,
+		NSInteger width, NSInteger height,
+		NSInteger bits_per_sample, NSInteger samples_per_pixel,
+		NSInteger bits_per_pixel, NSInteger bytes_per_row,
+		NSInteger colour_space, BOOL one_is_black,
 		BOOL is_planar, BOOL has_alpha, BOOL fast_min,
 		RXImage *dest_im, RXImage *dest_alpha,
 		XRectangle srect, XRectangle drect,
@@ -717,7 +717,7 @@ _bitmap_combine_alpha(RContext *context,
 
   /* Sanity check on colourspace and number of colours */
   {
-    int num_of_colours = samples_per_pixel - (has_alpha ? 1 : 0);
+    NSInteger num_of_colours = samples_per_pixel - (has_alpha ? 1 : 0);
     switch(colour_space)
       {
         case hsb_colorspace:
@@ -726,7 +726,7 @@ _bitmap_combine_alpha(RContext *context,
         case rgb_colorspace:
           if (num_of_colours != 3)
             {
-              NSLog(@"Bad number of colour planes - %d", num_of_colours);
+              NSLog(@"Bad number of colour planes - %ld", (long)num_of_colours);
               NSLog(@"RGB colourspace requires three planes excluding alpha");
               return -1;
             }
@@ -734,7 +734,7 @@ _bitmap_combine_alpha(RContext *context,
         case cmyk_colorspace:
           if (num_of_colours != 4)
             {
-              NSLog(@"Bad number of colour planes - %d", num_of_colours);
+              NSLog(@"Bad number of colour planes - %ld", (long)num_of_colours);
               NSLog(@"CMYK colourspace requires four planes excluding alpha");
               return -1;
             }
@@ -742,7 +742,7 @@ _bitmap_combine_alpha(RContext *context,
         case gray_colorspace:
           if (num_of_colours != 1)
             {
-              NSLog(@"Bad number of colour planes - %d", num_of_colours);
+              NSLog(@"Bad number of colour planes - %ld", (long)num_of_colours);
               NSLog(@"Gray colourspace requires one plane excluding alpha");
               return -1;
             }
@@ -754,17 +754,18 @@ _bitmap_combine_alpha(RContext *context,
   }
 
   /* bitmap decomposition structure */
-  img.bps = bits_per_sample;
-  img.bpp = bits_per_pixel;
-  img.spp = samples_per_pixel;
-  img.bpr = bytes_per_row;
+  /* WARNING: NSIntegers are truncated to ints */
+  img.bps = (int)bits_per_sample;
+  img.bpp = (int)bits_per_pixel;
+  img.spp = (int)samples_per_pixel;
+  img.bpr = (int)bytes_per_row;
   img.image_w = width;
   img.image_h = height;
   img.screen_w = srect.width;
   img.screen_h = srect.height;
   img.has_alpha = has_alpha;
   img.one_is_black = one_is_black;
-  img.cspace = colour_space;
+  img.cspace = (int)colour_space;
   img.cur_image_row = 0;
   img.cur_screen_row = 0;
 
@@ -803,7 +804,7 @@ _bitmap_combine_alpha(RContext *context,
           img.pro_mul = 255;
           break;
         default:
-          NSLog(@"Bizzare number of bits per sample %d", bits_per_sample);
+          NSLog(@"Bizzare number of bits per sample %ld", bits_per_sample);
           return -1;
      }
 

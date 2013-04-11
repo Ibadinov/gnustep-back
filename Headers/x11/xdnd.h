@@ -98,7 +98,7 @@ struct _DndClass {
 #define XDND_DROP_STAGE_CONVERTING	3
 #define XDND_DROP_STAGE_ENTERED		4
     int stage;
-    int dragging_version;
+    Atom dragging_version;
     int internal_drag;
     int want_position;
     int ready_to_drop;
@@ -118,7 +118,7 @@ struct _DndClass {
 
 void xdnd_init (DndClass * dnd, Display * display);
 void xdnd_set_dnd_aware (DndClass * dnd, Window window, Atom * typelist);
-int xdnd_is_dnd_aware (DndClass * dnd, Window window, int *version, Atom * typelist);
+int xdnd_is_dnd_aware (DndClass * dnd, Window window, Atom *version, Atom * typelist);
 void xdnd_set_type_list (DndClass * dnd, Window window, Atom * typelist);
 void xdnd_get_type_list (DndClass * dnd, Window window, Atom ** typelist);
 void xdnd_send_enter (DndClass * dnd, Window window, Window from, Atom * typelist);
@@ -130,6 +130,6 @@ void xdnd_send_drop (DndClass * dnd, Window window, Window from, unsigned long e
 void xdnd_send_finished (DndClass * dnd, Window window, Window from, int error);
 int xdnd_convert_selection (DndClass * dnd, Window window, Window requester, Atom type);
 int xdnd_set_selection_owner (DndClass * dnd, Window window, Atom type);
-void xdnd_selection_send (DndClass * dnd, XSelectionRequestEvent * request, unsigned char *data, int length);
+void xdnd_selection_send (DndClass * dnd, XSelectionRequestEvent * request, unsigned char *data, long length);
 
 #endif 	/* !_X_DND_H */

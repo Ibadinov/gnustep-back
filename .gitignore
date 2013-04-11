@@ -1,0 +1,11 @@
+*.xcodeproj/
+!*.xcodeproj/project.pbxproj
+.DS_Store
+
+# files produces by ./configure
+
+back.make
+config.h
+config.log
+config.make
+config.status

@@ -56,7 +56,7 @@ static BOOL shouldDrawAlpha = YES;
     [self copyGraphicContext]
 
 
-u_long   
+static u_long
 xrRGBToPixel(RContext* context, device_color_t color)
 {
   XColor cc;
@@ -1061,7 +1061,7 @@ static Region emptyRegion;
 
 - (void) _paintPath: (ctxt_object_t) drawType
 {
-  unsigned count;
+  NSUInteger count;
   NSBezierPath *flatPath;
   XPoint ll, ur;
   
@@ -1251,8 +1251,8 @@ static Region emptyRegion;
 
 - (void)DPSshow: (const char *)s 
 {
-  int len;
-  int width;
+  NSUInteger len;
+  NSInteger width;
   NSSize scale;
   XPoint xp;
 
@@ -1299,7 +1299,7 @@ static Region emptyRegion;
 }
 
 
-- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (size_t) length
+- (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs : (const NSSize *)advances : (NSUInteger) length
 {
   // FIXME: Currently advances is ignored
   int width;
@@ -1412,7 +1412,7 @@ static Region emptyRegion;
   // We can only set the dash pattern, if xgcntxt exists.
   if (xgcntxt == 0)
     return;
-  XSetDashes(XDPY, xgcntxt, dash_offset, dash_list, size);
+  XSetDashes(XDPY, xgcntxt, dash_offset, dash_list, (int)size);
 }
 
 - (void)DPSsetlinecap: (int)linecap 

@@ -283,14 +283,14 @@ fpfloat(FILE *stream, float f)
   [self notImplemented: _cmd];
 }
 
-- (void) GSShowText: (const char *)string : (size_t)length
+- (void) GSShowText: (const char *)string : (NSUInteger)length
 {
   fprintf(gstream, "(");
   [self output:string length: length];
   fprintf(gstream, ") show\n");
 }
 
-- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (size_t)length
+- (void) GSShowGlyphs: (const NSGlyph *)glyphs : (NSUInteger)length
 {
   GSFontInfo *font = gstate->font;
   if ([font respondsToSelector: @selector(nameOfGlyph:)])
@@ -321,7 +321,7 @@ fpfloat(FILE *stream, float f)
 
 - (void) GSShowGlyphsWithAdvances: (const NSGlyph *)glyphs
                                  : (const NSSize *)advances
-                                 : (size_t)length
+                                 : (NSUInteger)length
 {
   // FIXME: Currently advances is ignored
   [self GSShowGlyphs: glyphs : length];
@@ -873,10 +873,10 @@ fpfloat(FILE *stream, float f)
 
 
 static void
-writeHex(FILE *gstream, const unsigned char *data, int count)
+writeHex(FILE *gstream, const unsigned char *data, NSInteger count)
 {
-static const char *hexdigits = "0123456789abcdef";
-  int i;
+  static const char *hexdigits = "0123456789abcdef";
+  NSInteger i;
   for (i = 0; i < count; i++)
     {
       fputc(hexdigits[(int)(data[i] / 16)], gstream);

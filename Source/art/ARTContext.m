@@ -60,8 +60,8 @@
 
 - (void) setupDrawInfo: (void*)device
 {
-  int bpp;
-  int red_mask, green_mask, blue_mask;
+  NSInteger bpp;
+  NSUInteger red_mask, green_mask, blue_mask;
 #ifdef RDS
   RDSServer *s = (RDSServer *)server;
   
@@ -73,7 +73,7 @@
   [(XGServer *)server getForScreen: gs_win->screen pixelFormat: &bpp 
                 masks: &red_mask : &green_mask : &blue_mask];
 #endif
-  artcontext_setup_draw_info(&DI, red_mask, green_mask, blue_mask, bpp);
+  artcontext_setup_draw_info(&DI, (unsigned)red_mask, (unsigned)green_mask, (unsigned)blue_mask, (int)bpp);
 }
 
 - (void) flushGraphics
@@ -105,7 +105,7 @@
 - (BOOL) isCompatibleBitmap: (NSBitmapImageRep*)bitmap
 {
   NSString *colorSpaceName;
-  int numColors;
+  NSInteger numColors;
 
   if ([bitmap bitmapFormat] != 0)
     {

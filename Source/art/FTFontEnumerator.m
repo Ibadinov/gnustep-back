@@ -69,7 +69,7 @@ static BOOL anti_alias_by_default;
 
 
 
-static int traits_from_string(NSString *s, unsigned int *traits, unsigned int *weight)
+static NSUInteger traits_from_string(NSString *s, unsigned int *traits, unsigned int *weight)
 {
 static struct
 {
@@ -116,7 +116,7 @@ static struct
 {@"Condensed"      ,NSCondensedFontMask       ,-1},
 {nil,0,-1}
 };
-  int i;
+  NSUInteger i;
 
   *traits = 0;
 //  printf("do '%@'\n", s);
@@ -150,7 +150,7 @@ static struct
 
 static NSArray *fix_path(NSString *path, NSArray *files)
 {
-  int i, c = [files count];
+  NSUInteger i, c = [files count];
   NSMutableArray *nfiles;
 
   if (!files)
@@ -232,7 +232,7 @@ static void add_face(NSString *family, int family_weight,
   else if (!from_nfont)
     { /* try to guess something for .font packages */
       unsigned int dummy;
-      int split = traits_from_string(family,&dummy,&dummy);
+      NSUInteger split = traits_from_string(family,&dummy,&dummy);
       rawFaceName = faceName = [family substringFromIndex: split];
       family = [family substringToIndex: split];
       faceName = [NSLocalizedStringFromTableInBundle(faceName,@"nfontFaceNames",
@@ -257,7 +257,7 @@ static void add_face(NSString *family, int family_weight,
     NSDictionary *sizes;
     NSEnumerator *e;
     NSString *size;
-    int i;
+    NSUInteger i;
 
     sizes = [d objectForKey: @"ScreenFonts"];
 
@@ -291,7 +291,7 @@ static void add_face(NSString *family, int family_weight,
 
   if ([d objectForKey: @"RenderHints_hack"])
     fi->render_hints_hack
-      = strtol([[d objectForKey: @"RenderHints_hack"] cString], NULL, 0);
+      = (unsigned)strtol([[d objectForKey: @"RenderHints_hack"] cString], NULL, 0);
   else
     {
       if (anti_alias_by_default)
@@ -329,7 +329,7 @@ static void add_face(NSString *family, int family_weight,
 
 static void load_font_configuration(void)
 {
-  int i, j, k, c;
+  NSUInteger i, j, k, c;
   NSArray *paths;
   NSString *path, *font_path;
   NSFileManager *fm = [NSFileManager defaultManager];
@@ -445,8 +445,8 @@ static void load_font_configuration(void)
       [families_pending removeAllObjects];
     }
 
-  NSDebugLLog(@"ftfont", @"got %i fonts in %i families",
-    [fcfg_allFontNames count], [fcfg_allFontFamilies count]);
+  NSDebugLLog(@"ftfont", @"got %lu fonts in %lu families",
+    (unsigned long)[fcfg_allFontNames count], (unsigned long)[fcfg_allFontFamilies count]);
 
   if (![fcfg_allFontNames count])
     {

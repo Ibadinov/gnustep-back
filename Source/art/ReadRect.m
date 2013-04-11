@@ -109,7 +109,7 @@
   [matrix release];
 
   if (!w || !h)
-    return [[md autorelease] makeImmutableCopyOnFail: YES];
+    return [[[md autorelease] copy] autorelease];
 
   /* The rectangle isn't degenerate, so we need to actually copy some data. */
   {
@@ -135,10 +135,10 @@
 	c.dst += w * 4;
       }
 
-    [md setObject: [[d autorelease] makeImmutableCopyOnFail: YES]  forKey: @"Data"];
+    [md setObject: [[[d autorelease] copy] autorelease]  forKey: @"Data"];
   }
 
-  return [[md autorelease] makeImmutableCopyOnFail: YES];
+  return [[[md autorelease] copy] autorelease];
 }
 
 @end

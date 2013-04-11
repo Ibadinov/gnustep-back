@@ -193,7 +193,7 @@ static BOOL XGInitAtoms(Display *dpy)
   XGCValues gcv;
   NSData *d = [string dataUsingEncoding: mostCompatibleStringEncoding
 		      allowLossyConversion: YES];
-  int length = [d length];
+  NSUInteger length = [d length];
   const char *cstr = (const char*)[d bytes];
 
   // Select this font, although it might already be current.
@@ -201,18 +201,18 @@ static BOOL XGInitAtoms(Display *dpy)
   XChangeGC(xdpy, xgcntxt, GCFont, &gcv);
 
   // FIXME: Use XDrawString16 for NSTwoByteGlyphPacking
-  XDrawString(xdpy, draw, xgcntxt, xp.x, xp.y, cstr, length);
+  XDrawString(xdpy, draw, xgcntxt, xp.x, xp.y, cstr, (int)length);
 }
 
-- (void) draw: (const char*) s length: (int) len 
+- (void) draw: (const char*) s length: (NSUInteger) len 
     onDisplay: (Display*) xdpy drawable: (Drawable) draw
 	 with: (GC) xgcntxt at: (XPoint) xp
 {
   // This font must already be active!
-  XDrawString(xdpy, draw, xgcntxt, xp.x, xp.y, s, len);
+  XDrawString(xdpy, draw, xgcntxt, xp.x, xp.y, s, (int)len);
 }
 
-- (void) drawGlyphs: (const NSGlyph *) glyphs length: (int) len
+- (void) drawGlyphs: (const NSGlyph *) glyphs length: (NSUInteger) len
 	  onDisplay: (Display*) xdpy drawable: (Drawable) draw
 	       with: (GC) xgcntxt at: (XPoint) xp
 {
@@ -225,26 +225,26 @@ static BOOL XGInitAtoms(Display *dpy)
       buf[i] = glyphs[i];
     }
 
-  XDrawString(xdpy, draw, xgcntxt, xp.x, xp.y, buf, len);
+  XDrawString(xdpy, draw, xgcntxt, xp.x, xp.y, buf, (int)len);
 }
 
 - (CGFloat) widthOfString: (NSString*)string
 {
   NSData *d = [string dataUsingEncoding: mostCompatibleStringEncoding
 		      allowLossyConversion: YES];
-  int length = [d length];
+  NSUInteger length = [d length];
   const char *cstr = (const char*)[d bytes];
 
   // FIXME: Use XTextWidth16 for NSTwoByteGlyphPacking
-  return XTextWidth(font_info, cstr, length);
+  return XTextWidth(font_info, cstr, (int)length);
 }
 
-- (CGFloat) widthOf: (const char*) s length: (int) len
+- (CGFloat) widthOf: (const char*) s length: (NSUInteger) len
 {
-  return XTextWidth(font_info, s, len);
+  return XTextWidth(font_info, s, (int)len);
 }
 
-- (CGFloat) widthOfGlyphs: (const NSGlyph *) glyphs length: (int) len
+- (CGFloat) widthOfGlyphs: (const NSGlyph *) glyphs length: (NSUInteger) len
 {
   char buf[len];
   int i;
@@ -254,7 +254,7 @@ static BOOL XGInitAtoms(Display *dpy)
       buf[i] = glyphs[i];
     }
 
-  return XTextWidth(font_info, buf, len);
+  return XTextWidth(font_info, buf, (int)len);
 }
 
 - (void) setActiveFor: (Display*) xdpy gc: (GC) xgcntxt

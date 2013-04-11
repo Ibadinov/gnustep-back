@@ -49,7 +49,7 @@
 extern void _wraster_change_filter(int type);
 
 
-static Bool bestContext(Display *dpy, int screen_number, RContext *context);
+static Bool bestContext(Display *dpy, RInteger screen_number, RContext *context);
 
 static RContextAttributes DEFAULT_CONTEXT_ATTRIBS = {
     RC_UseSharedMemory|RC_RenderMode|RC_ColorsPerChannel, /* flags */
@@ -107,7 +107,7 @@ RSupportedFileFormats(void)
 static Bool
 allocateStandardPseudoColor(RContext *ctx, XStandardColormap *stdcmap)
 {
-    int i;
+    RUInteger i;
 
     ctx->ncolors = stdcmap->red_max * stdcmap->red_mult
 	+ stdcmap->green_max * stdcmap->green_mult
@@ -160,7 +160,7 @@ allocateStandardPseudoColor(RContext *ctx, XStandardColormap *stdcmap)
 static Bool
 setupStandardColormap(RContext *ctx, Atom property)
 {
-    if (!XmuLookupStandardColormap(ctx->dpy, ctx->screen_number,
+    if (!XmuLookupStandardColormap(ctx->dpy, (int)ctx->screen_number,
 				   ctx->visual->visualid,
 				   ctx->depth, property,
 				   True, True)) {
@@ -185,9 +185,9 @@ allocatePseudoColor(RContext *ctx)
     XColor *colors;
     XColor avcolors[256];
     int avncolors;
-    int i, ncolors, r, g, b;
+    RInteger i, ncolors, r, g, b;
     int retries;
-    int cpc = ctx->attribs->colors_per_channel;
+    RInteger cpc = ctx->attribs->colors_per_channel;
     
     ncolors = cpc * cpc * cpc;
     
@@ -326,9 +326,9 @@ allocateGrayScale(RContext *ctx)
     XColor *colors;
     XColor avcolors[256];
     int avncolors;
-    int i, ncolors, r, g, b;
+    RInteger i, ncolors, r, g, b;
     int retries;
-    int cpc = ctx->attribs->colors_per_channel;
+    RInteger cpc = ctx->attribs->colors_per_channel;
 
     ncolors = cpc * cpc * cpc;
     
@@ -509,12 +509,12 @@ setupPseudoColorColormap(RContext *context)
 
 
 static char*
-mygetenv(char *var, int scr)
+mygetenv(char *var, RInteger scr)
 {
     char *p;
     char varname[64];
 
-    sprintf(varname, "%s%i", var, scr);
+    sprintf(varname, "%s%ld", var, (long)scr);
     p = getenv(varname);
     if (!p) {
 	p = getenv(var);
@@ -524,7 +524,7 @@ mygetenv(char *var, int scr)
 
 
 static void 
-gatherconfig(RContext *context, int screen_n)
+gatherconfig(RContext *context, RInteger screen_n)
 {
     char *ptr;
 
@@ -564,7 +564,7 @@ gatherconfig(RContext *context, int screen_n)
 
 
 static void
-getColormap(RContext *context, int screen_number)
+getColormap(RContext *context, RInteger screen_number)
 {
     Colormap cmap = None;
     XStandardColormap *cmaps;
@@ -616,7 +616,7 @@ count_offset(unsigned long mask)
 
 
 RContext*
-RCreateContext(Display *dpy, int screen_number, RContextAttributes *attribs)
+RCreateContext(Display *dpy, RInteger screen_number, RContextAttributes *attribs)
 {
     RContext *context;
     XGCValues gcv;
@@ -662,7 +662,7 @@ RCreateContext(Display *dpy, int screen_number, RContextAttributes *attribs)
 	XVisualInfo *vinfo, templ;
 	int nret;
 	    
-	templ.screen = screen_number;
+	templ.screen = (int)screen_number;
 	templ.visualid = context->attribs->visualid;
 	vinfo = XGetVisualInfo(context->dpy, VisualIDMask|VisualScreenMask,
 			       &templ, &nret);
@@ -816,7 +816,7 @@ RCreateContext(Display *dpy, int screen_number, RContextAttributes *attribs)
 
 
 static Bool
-bestContext(Display *dpy, int screen_number, RContext *context)
+bestContext(Display *dpy, RInteger screen_number, RContext *context)
 {
     XVisualInfo *vinfo=NULL, rvinfo;
     int best = -1, numvis, i;
@@ -824,7 +824,7 @@ bestContext(Display *dpy, int screen_number, RContext *context)
     XSetWindowAttributes attr;
     
     rvinfo.class  = TrueColor;
-    rvinfo.screen = screen_number;
+    rvinfo.screen = (int)screen_number;
 
     #ifdef XRENDER
 

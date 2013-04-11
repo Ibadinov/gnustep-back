@@ -34,7 +34,7 @@
 @interface GSFunction : NSObject
 {
   /* General information about the function. */
-  int num_in, num_out;
+  NSInteger num_in, num_out;
 
   double *domain; /* num_in * 2 */
   double *range; /* num_out * 2 */

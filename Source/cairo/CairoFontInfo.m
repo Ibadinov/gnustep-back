@@ -37,7 +37,7 @@
 
 @implementation CairoFontInfo 
 
-- (void) setCacheSize: (unsigned int)size
+- (void) setCacheSize: (NSUInteger)size
 {
   _cacheSize = size;
   if (_cachedSizes)
@@ -227,8 +227,8 @@ BOOL _cairo_extents_for_NSGlyph(cairo_scaled_font_t *scaled_font, NSGlyph glyph,
   unichar ustr[2];
   char str[4];
   unsigned char *b;
-  unsigned int size = 4;
-  int length = 1;
+  NSUInteger size = 4;
+  NSUInteger length = 1;
 
   ustr[0] = glyph;
   ustr[1] = 0;
@@ -252,7 +252,7 @@ BOOL _cairo_extents_for_NSGlyph(cairo_scaled_font_t *scaled_font, NSGlyph glyph,
 
   if (_cachedSizes)
     {
-      int entry = glyph % _cacheSize;
+      NSUInteger entry = glyph % _cacheSize;
 
       if (_cachedGlyphs[entry] == glyph)
         {
@@ -319,7 +319,7 @@ BOOL _cairo_extents_for_NSGlyph(cairo_scaled_font_t *scaled_font, NSGlyph glyph,
 }
 
 - (void) appendBezierPathWithGlyphs: (NSGlyph *)glyphs 
-                              count: (int)length 
+                              count: (NSInteger)length 
                        toBezierPath: (NSBezierPath *)path
 {
   cairo_format_t format = CAIRO_FORMAT_ARGB32;
@@ -328,11 +328,11 @@ BOOL _cairo_extents_for_NSGlyph(cairo_scaled_font_t *scaled_font, NSGlyph glyph,
   int ix = 400;
   int iy = 400;
   unsigned char *cdata;
-  int i;
+  NSUInteger i;
   unichar ustr[length+1];
   char str[3*length+1];
   unsigned char *b;
-  unsigned int size = 3*length+1;
+  NSUInteger size = 3*length+1;
   cairo_status_t status;
   cairo_matrix_t font_matrix;
 
@@ -469,15 +469,15 @@ BOOL _cairo_extents_for_NSGlyph(cairo_scaled_font_t *scaled_font, NSGlyph glyph,
 }
 
 - (void) drawGlyphs: (const NSGlyph*)glyphs
-             length: (int)length 
+             length: (NSUInteger)length 
                  on: (cairo_t*)ct
 {
   cairo_matrix_t font_matrix;
   unichar ustr[length+1];
   char str[3*length+1];
   unsigned char *b;
-  int i;
-  unsigned int size = 3*length+1;
+  NSUInteger i;
+  NSUInteger size = 3*length+1;
 
   for (i = 0; i < length; i++)
     {

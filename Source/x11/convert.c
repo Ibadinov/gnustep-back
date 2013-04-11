@@ -60,10 +60,10 @@ typedef struct RConversionTable {
 
 
 typedef struct RStdConversionTable {
-    unsigned int table[256];
+    unsigned long table[256];
 
-    unsigned short mult;
-    unsigned short max;
+    unsigned long mult;
+    unsigned long max;
 
     struct RStdConversionTable *next;
 } RStdConversionTable;
@@ -103,11 +103,11 @@ computeTable(unsigned short mask)
 }
 
 
-static unsigned int*
-computeStdTable(unsigned int mult, unsigned int max)
+static unsigned long*
+computeStdTable(unsigned long mult, unsigned long max)
 {
     RStdConversionTable *tmp = stdConversionTable;
-    unsigned int i;
+    unsigned long i;
 
     while (tmp) {
         if (tmp->mult == mult && tmp->max == max)
@@ -386,7 +386,7 @@ convertPseudoColor_to_8(RXImage *ximg, RImage *image,
 			   const unsigned short *btable,
 			   const int dr, const int dg, const int db,
 			   unsigned long *pixels,
-			   int cpc)
+			   RInteger cpc)
 {
     signed char *terr;
     int x, y, r, g, b;
@@ -395,7 +395,7 @@ convertPseudoColor_to_8(RXImage *ximg, RImage *image,
     unsigned char *ptr = image->data;
     unsigned char *optr = (unsigned char *)ximg->image->data;
     int channels = (image->format == RRGBAFormat ? 4 : 3);
-    int cpcpc = cpc*cpc;
+    RInteger cpcpc = cpc*cpc;
 
     /* convert and dither the image to XImage */
     for (y=0; y<image->height; y++) {
@@ -463,12 +463,12 @@ image2PseudoColor(RContext *ctx, RImage *image)
     register int x, y, r, g, b;
     unsigned char *ptr;
     unsigned long pixel;
-    const int cpc=ctx->attribs->colors_per_channel;
+    const RInteger cpc=ctx->attribs->colors_per_channel;
     const unsigned short rmask = cpc-1; /* different sizes could be used */
     const unsigned short gmask = rmask; /* for r,g,b */
     const unsigned short bmask = rmask;
     unsigned short *rtable, *gtable, *btable;
-    const int cpccpc = cpc*cpc;
+    const RInteger cpccpc = cpc*cpc;
     int channels = (image->format == RRGBAFormat ? 4 : 3);
 
     ximg = RCreateXImage(ctx, ctx->depth, image->width, image->height);
@@ -548,12 +548,13 @@ static RXImage*
 image2StandardPseudoColor(RContext *ctx, RImage *image)
 {
     RXImage *ximg;
-    register int x, y, r, g, b;
+    register int x, y;
+    register long r, g, b;
     unsigned char *ptr;
     unsigned long pixel;
     unsigned char *data;
-    unsigned int *rtable, *gtable, *btable;
-    unsigned int base_pixel = ctx->std_rgb_map->base_pixel;
+    unsigned long *rtable, *gtable, *btable;
+    unsigned long base_pixel = ctx->std_rgb_map->base_pixel;
     int channels = (image->format == RRGBAFormat ? 4 : 3);
 
 
@@ -698,7 +699,7 @@ image2GrayScale(RContext *ctx, RImage *image)
     RXImage *ximg;
     register int x, y, g;
     unsigned char *ptr;
-    const int cpc=ctx->attribs->colors_per_channel;
+    const RInteger cpc=ctx->attribs->colors_per_channel;
     unsigned short gmask;
     unsigned short *table;
     unsigned char *data;
@@ -1079,7 +1080,7 @@ RGetClosestXColor(RContext *context, RColor *color, XColor *retColor)
 	       || context->vclass == StaticColor) {
 
 	if (context->attribs->standard_colormap_mode != RIgnoreStdColormap) {
-	    unsigned int *rtable, *gtable, *btable;
+	    unsigned long *rtable, *gtable, *btable;
 
 	    rtable = computeStdTable(context->std_rgb_map->red_mult,
 				     context->std_rgb_map->red_max);
@@ -1105,13 +1106,13 @@ RGetClosestXColor(RContext *context, RColor *color, XColor *retColor)
 	    retColor->flags = DoRed|DoGreen|DoBlue;
 	    
 	} else {
-	    const int cpc=context->attribs->colors_per_channel;
+	    const RInteger cpc=context->attribs->colors_per_channel;
 	    const unsigned short rmask = cpc-1; /* different sizes could be used */
 	    const unsigned short gmask = rmask; /* for r,g,b */
 	    const unsigned short bmask = rmask;
 	    unsigned short *rtable, *gtable, *btable;
-	    const int cpccpc = cpc*cpc;
-	    int index;
+	    const RInteger cpccpc = cpc*cpc;
+	    RInteger index;
 
 	    rtable = computeTable(rmask);
 	    gtable = computeTable(gmask);
@@ -1128,7 +1129,7 @@ RGetClosestXColor(RContext *context, RColor *color, XColor *retColor)
 
     } else if (context->vclass == GrayScale || context->vclass == StaticGray) {
 
-	const int cpc = context->attribs->colors_per_channel;
+	const RInteger cpc = context->attribs->colors_per_channel;
 	unsigned short gmask;
 	unsigned short *table;
 	int index;

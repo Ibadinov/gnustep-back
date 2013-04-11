@@ -75,7 +75,7 @@ terminate(int sig)
 extern int XGErrorHandler(Display *display, XErrorEvent *err);
 
 static NSString *
-_parse_display_name(NSString *name, int *dn, int *sn)
+_parse_display_name(NSString *name, NSInteger *dn, NSInteger *sn)
 {
   int d, s;
   NSString *host;
@@ -136,7 +136,7 @@ _parse_display_name(NSString *name, int *dn, int *sn)
   XGDrawMechanism drawMechanism;
 }
 
-- initForDisplay: (Display *)dpy screen: (int)screen_number;
+- initForDisplay: (Display *)dpy screen: (NSInteger)screenNumber;
 - (XGDrawMechanism) drawMechanism;
 - (RContext *) context;
 @end
@@ -145,7 +145,7 @@ _parse_display_name(NSString *name, int *dn, int *sn)
 
 - (RContextAttributes *) _getXDefaults
 {
-  int dummy;
+  NSInteger dummy;
   RContextAttributes *attribs;
 
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -168,7 +168,7 @@ _parse_display_name(NSString *name, int *dn, int *sn)
   return attribs;
 }
 
-- initForDisplay: (Display *)dpy screen: (int)screen_number
+- initForDisplay: (Display *)dpy screen: (NSInteger)screenNumber
 {
   RContextAttributes *attribs;
   XColor testColor;
@@ -177,7 +177,7 @@ _parse_display_name(NSString *name, int *dn, int *sn)
    /* Get the visual information */
   attribs = NULL;
   //attribs = [self _getXDefaults];
-  rcontext = RCreateContext(dpy, screen_number, attribs);
+  rcontext = RCreateContext(dpy, screenNumber, attribs);
 
   /*
    * If we have shared memory available, only use it when the XGPS-Shm
@@ -285,8 +285,8 @@ _parse_display_name(NSString *name, int *dn, int *sn)
         @"to work ... and submit a patch.");
       drawMechanism = XGDM_PORTABLE;
     }
-  NSDebugLLog(@"XGTrace", @"Draw mech %d for screen %d", drawMechanism,
-        screen_number);
+  NSDebugLLog(@"XGTrace", @"Draw mech %d for screen %ld", drawMechanism,
+        (long)screenNumber);
   return self;
 }
 
@@ -379,11 +379,11 @@ _parse_display_name(NSString *name, int *dn, int *sn)
 
 - (id) _initXContext
 {
-  int screen_number, display_number;
-  NSString *display_name;
+  NSInteger screenNumber, displayNumber;
+  NSString *displayName;
 
-  display_name = [server_info objectForKey: GSDisplayName];
-  if (display_name == nil)
+  displayName = [server_info objectForKey: GSDisplayName];
+  if (displayName == nil)
     {
       NSString *host = [[NSUserDefaults standardUserDefaults]
                            stringForKey: @"NSHost"];
@@ -398,7 +398,7 @@ _parse_display_name(NSString *name, int *dn, int *sn)
             sn = @"0";
           if (host == nil)
             host = @"";
-          display_name = [NSString stringWithFormat: @"%@:%@.%@", host, dn,sn];
+          displayName = [NSString stringWithFormat: @"%@:%@.%@", host, dn,sn];
         }
       else if ((host != nil) && ([host isEqual: @""] == NO))
         {
@@ -407,35 +407,35 @@ _parse_display_name(NSString *name, int *dn, int *sn)
            * to generate a display name for X from the host name and the
            * default display and screen numbers (zero).
            */
-          display_name = [NSString stringWithFormat: @"%@:0.0", host];
+          displayName = [NSString stringWithFormat: @"%@:0.0", host];
         }
     }
 
-  if (display_name)
+  if (displayName)
     {
-      dpy = XOpenDisplay([display_name cString]);
+      dpy = XOpenDisplay([displayName cString]);
     }
   else
     { 
       dpy = XOpenDisplay(NULL);
-      display_name = [NSString stringWithCString: XDisplayName(NULL)];
+      displayName = [NSString stringWithCString: XDisplayName(NULL)];
     }
 
   if (dpy == NULL)
     {
-      char *dname = XDisplayName([display_name cString]);
+      char *dname = XDisplayName([displayName cString]);
       [NSException raise: NSWindowServerCommunicationException
                   format: @"Unable to connect to X Server `%s'", dname];
     }
 
   /* Parse display information */
-  _parse_display_name(display_name, &display_number, &screen_number);
-  NSDebugLog(@"Opened display %@, display %d screen %d", 
-             display_name, display_number, screen_number);
-  [server_info setObject: display_name forKey: GSDisplayName];
-  [server_info setObject: [NSNumber numberWithInt: display_number]
+  _parse_display_name(displayName, &displayNumber, &screenNumber);
+  NSDebugLog(@"Opened display %@, display %ld screen %ld", 
+             displayName, (long)displayNumber, (long)screenNumber);
+  [server_info setObject: displayName forKey: GSDisplayName];
+  [server_info setObject: [NSNumber numberWithInteger: displayNumber]
                   forKey: GSDisplayNumber];
-  [server_info setObject: [NSNumber numberWithInt: screen_number] 
+  [server_info setObject: [NSNumber numberWithInteger: screenNumber] 
                   forKey: GSScreenNumber];
 
   /* Setup screen*/
@@ -443,7 +443,7 @@ _parse_display_name(NSString *name, int *dn, int *sn)
     screenList = NSCreateMapTable(NSIntMapKeyCallBacks,
                                  NSObjectMapValueCallBacks, 20);
 
-  defScreen = screen_number;
+  defScreen = screenNumber;
 
   XSetErrorHandler(XGErrorHandler);
 
@@ -502,23 +502,23 @@ _parse_display_name(NSString *name, int *dn, int *sn)
   return dpy;
 }
 
-- (XGScreenContext *) _screenContextForScreen: (int)screen_number
+- (XGScreenContext *) _screenContextForScreen: (NSInteger)screenNumber
 {
   int count = ScreenCount(dpy);
   XGScreenContext *screen;
 
-  if (screen_number >= count)
+  if (screenNumber >= count)
     {
       [NSException raise: NSInvalidArgumentException
                    format: @"Request for invalid screen"];
     }
 
-  screen = NSMapGet(screenList, (void *)(uintptr_t)screen_number);
+  screen = NSMapGet(screenList, (void *)(uintptr_t)screenNumber);
   if (screen == NULL)
     {
       screen = [[XGScreenContext alloc] 
-                   initForDisplay: dpy screen: screen_number];
-      NSMapInsert(screenList, (void *)(uintptr_t)screen_number, (void *)screen);
+                   initForDisplay: dpy screen: screenNumber];
+      NSMapInsert(screenList, (void *)(uintptr_t)screenNumber, (void *)screen);
       RELEASE(screen);
     }
 
@@ -529,19 +529,19 @@ _parse_display_name(NSString *name, int *dn, int *sn)
    Returns a pointer to a structure which describes aspects of the
    X windows display 
 */
-- (void *) xrContextForScreen: (int)screen_number
+- (void *) xrContextForScreen: (NSInteger)screenNumber
 {
-  return [[self _screenContextForScreen: screen_number] context];
+  return [[self _screenContextForScreen: screenNumber] context];
 }
 
-- (Visual *) visualForScreen: (int)screen_number
+- (Visual *) visualForScreen: (NSInteger)screenNumber
 {
-    return [[self _screenContextForScreen: screen_number] context]->visual;
+    return [[self _screenContextForScreen: screenNumber] context]->visual;
 }
 
-- (int) depthForScreen: (int)screen_number
+- (int) depthForScreen: (NSInteger)screenNumber
 {
-    return [[self _screenContextForScreen: screen_number] context]->depth;
+    return [[self _screenContextForScreen: screenNumber] context]->depth;
 }
 
 /**
@@ -549,13 +549,13 @@ _parse_display_name(NSString *name, int *dn, int *sn)
    the screen and how pixels should be drawn to the screen for maximum
    speed.
 */
-- (XGDrawMechanism) drawMechanismForScreen: (int)screen_number
+- (XGDrawMechanism) drawMechanismForScreen: (NSInteger)screenNumber
 {
- return [[self _screenContextForScreen: screen_number] drawMechanism];
+ return [[self _screenContextForScreen: screenNumber] drawMechanism];
 }
 
 // Could use NSSwapInt() instead
-static unsigned int flip_bytes32(unsigned int i)
+static uint32_t flip_bytes32(uint32_t i)
 {
   return ((i >> 24) & 0xff)
       |((i >>  8) & 0xff00)
@@ -563,12 +563,13 @@ static unsigned int flip_bytes32(unsigned int i)
       |((i << 24) & 0xff000000);
 }
 
-static unsigned int flip_bytes16(unsigned int i)
+static uint16_t flip_bytes16(uint16_t i)
 {
   return ((i >> 8) & 0xff)
       |((i <<  8) & 0xff00);
 }
 
+/* True iff we're big-endian */
 static int byte_order(void)
 {
   union
@@ -583,8 +584,8 @@ static int byte_order(void)
 /**
  * Used by the art backend to determine the drawing mechanism.
  */
-- (void) getForScreen: (int)screen_number pixelFormat: (int *)bpp_number 
-                masks: (int *)red_mask : (int *)green_mask : (int *)blue_mask
+- (void) getForScreen: (NSInteger)screenNumber pixelFormat: (NSInteger *)bpp_number 
+                masks: (NSUInteger *)red_mask : (NSUInteger *)green_mask : (NSUInteger *)blue_mask
 {
   Visual *visual;
   XImage *i;
@@ -621,7 +622,7 @@ static int byte_order(void)
   RContext *context;
 
   // Better to get the used visual from the context.
-  context = [self xrContextForScreen: screen_number];
+  context = [self xrContextForScreen: screenNumber];
   visual = context->visual;
   bpp = context->depth;
 #endif 
@@ -646,15 +647,15 @@ static int byte_order(void)
         {
           if ((bpp == 32) || (bpp == 24))
             {
-              *red_mask = flip_bytes32(*red_mask);
-              *green_mask = flip_bytes32(*green_mask);
-              *blue_mask = flip_bytes32(*blue_mask);
+              *red_mask = flip_bytes32((uint32_t)*red_mask);
+              *green_mask = flip_bytes32((uint32_t)*green_mask);
+              *blue_mask = flip_bytes32((uint32_t)*blue_mask);
             }
           else if (bpp == 16)
             {
-              *red_mask = flip_bytes16(*red_mask);
-              *green_mask = flip_bytes16(*green_mask);
-              *blue_mask = flip_bytes16(*blue_mask);
+              *red_mask = flip_bytes16((uint16_t)*red_mask);
+              *green_mask = flip_bytes16((uint16_t)*green_mask);
+              *blue_mask = flip_bytes16((uint16_t)*blue_mask);
             }
         }
     }
@@ -663,20 +664,20 @@ static int byte_order(void)
 /**
    Returns the root window of the display 
 */
-- (Window) xDisplayRootWindowForScreen: (int)screen_number;
+- (Window) xDisplayRootWindowForScreen: (NSInteger)screenNumber;
 {
-  return RootWindow(dpy, screen_number);
+  return RootWindow(dpy, screenNumber);
 }
 
 /**
    Returns the closest color in the current colormap to the indicated
    X color
 */
-- (XColor) xColorFromColor: (XColor)color forScreen: (int)screen_number
+- (XColor) xColorFromColor: (XColor)color forScreen: (NSInteger)screenNumber
 {
   Status ret;
   RColor rcolor;
-  RContext *context = [self xrContextForScreen: screen_number];
+  RContext *context = [self xrContextForScreen: screenNumber];
   XAllocColor(dpy, context->cmap, &color);
   rcolor.red   = color.red / 256;
   rcolor.green = color.green / 256;

@@ -341,9 +341,9 @@ Ones(unsigned int n)
                ucs4 != FC_CHARSET_DONE;
                ucs4 = FcCharSetNextPage(charset, map, &next))
             {
-              unsigned int i;
+              NSUInteger i;
               NSRange aRange;
-              unsigned int max;
+              NSUInteger max;
 
               aRange = NSMakeRange(ucs4, FC_CHARSET_MAP_SIZE * sizeof(FcChar32));
               max = NSMaxRange(aRange);
@@ -378,20 +378,20 @@ Ones(unsigned int n)
 - (CGFloat) widthOfString: (NSString*)string
 {
   XGlyphInfo extents;
-  int len = [string length];
+  NSUInteger len = [string length];
   XftChar16 str[len]; 
 
   [string getCharacters: (unichar*)str];
   XftTextExtents16 ([XGServer currentXDisplay],
 		    font_info,
 		    str, 
-		    len,
+		    (int)len,
 		    &extents);
 
   return extents.width;
 }
 
-- (CGFloat) widthOfGlyphs: (const NSGlyph *) glyphs length: (int) len
+- (CGFloat) widthOfGlyphs: (const NSGlyph *) glyphs length: (NSUInteger) len
 {
   XGlyphInfo extents;
   XftChar16 buf[len];
@@ -405,7 +405,7 @@ Ones(unsigned int n)
   XftTextExtents16 ([XGServer currentXDisplay],
 		    font_info,
 		    buf,
-		    len,
+		    (int)len,
 		    &extents);
 
   return extents.width;
@@ -492,7 +492,7 @@ Ones(unsigned int n)
 {
   NSData *d = [string dataUsingEncoding: mostCompatibleStringEncoding
 		      allowLossyConversion: YES];
-  int length = [d length];
+  NSUInteger length = [d length];
   const char *cstr = (const char*)[d bytes];
   XGGState *state = (XGGState *)[(XGContext *)GSCurrentContext() currentGState];
   XftDraw *xftdraw = [state xftDrawForDrawable: draw];
@@ -500,10 +500,10 @@ Ones(unsigned int n)
 
   /* do it */
   XftDrawString16(xftdraw, &xftcolor, font_info, 
-		  xp.x, xp.y, (XftChar16*)cstr, length);
+		  xp.x, xp.y, (XftChar16*)cstr, (int)length);
 }
 
-- (void) drawGlyphs: (const NSGlyph *) glyphs length: (int) len
+- (void) drawGlyphs: (const NSGlyph *) glyphs length: (NSUInteger) len
 	  onDisplay: (Display*) xdpy drawable: (Drawable) draw
 	       with: (GC) xgcntxt at: (XPoint) xp
 {
@@ -520,14 +520,14 @@ Ones(unsigned int n)
 
   /* do it */
   XftDrawString16(xftdraw, &xftcolor, font_info, 
-		  xp.x, xp.y, (XftChar16*)buf, len);
+		  xp.x, xp.y, (XftChar16*)buf, (int)len);
 }
 
 - (void) draw: (const char*) s length: (int) len 
     onDisplay: (Display*) xdpy drawable: (Drawable) draw
 	 with: (GC) xgcntxt at: (XPoint) xp
 {
-  int length = strlen(s);
+  NSUInteger length = strlen(s);
   XGGState *state = (XGGState *)[(XGContext *)GSCurrentContext() currentGState];
   XftDraw *xftdraw = [state xftDrawForDrawable: draw];
   XftColor xftcolor = [state xftColor];
@@ -537,13 +537,13 @@ Ones(unsigned int n)
   if (NSUTF8StringEncoding == mostCompatibleStringEncoding)
     {
       XftDrawStringUtf8(xftdraw, &xftcolor, font_info,
-                        xp.x, xp.y, (XftChar8 *)s, length);
+                        xp.x, xp.y, (XftChar8 *)s, (int)length);
     }
   else
 #endif
     {
       XftDrawString8(xftdraw, &xftcolor, font_info, 
-                   xp.x, xp.y, (XftChar8*)s, length);
+                   xp.x, xp.y, (XftChar8*)s, (int)length);
     }
 }
 
@@ -663,7 +663,7 @@ static FT_Outline_Funcs bezierpath_funcs = {
 };
 
 - (void) appendBezierPathWithGlyphs: (NSGlyph *)glyphs
-                              count: (int)count
+                              count: (NSInteger)count
                        toBezierPath: (NSBezierPath *)path
 {
   int i;
