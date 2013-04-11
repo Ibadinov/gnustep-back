@@ -2551,7 +2551,7 @@ process_modifier_flags(unsigned int state)
   return p;
 }
 
-- (NSEvent*) getEventMatchingMask: (unsigned)mask
+- (NSEvent*) getEventMatchingMask: (NSUInteger)mask
                        beforeDate: (NSDate*)limit
                            inMode: (NSString*)mode
                           dequeue: (BOOL)flag
@@ -2563,7 +2563,7 @@ process_modifier_flags(unsigned int state)
                              dequeue: flag];
 }
 
-- (void) discardEventsMatchingMask: (unsigned)mask
+- (void) discardEventsMatchingMask: (NSUInteger)mask
                        beforeEvent: (NSEvent*)limit
 {
   [self receivedEvent: 0 type: 0 extra: 0 forMode: nil];

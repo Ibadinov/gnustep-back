@@ -472,7 +472,7 @@ static void setWindowHintsForStyle (Display *dpy, Window window, NSUInteger styl
   return NSMapGet(windowmaps, (void *)xWindow);
 }
 
-+ (gswindow_device_t *) _windowWithTag: (int)windowNumber
++ (gswindow_device_t *) _windowWithTag: (NSInteger)windowNumber
 {
   return WINDOW_WITH_TAG(windowNumber);
 }
@@ -2289,7 +2289,7 @@ _get_next_prop_new_event(Display *display, XEvent *event, char *arg)
   return window->number;
 }
 
-- (void) termwindow: (int)win
+- (void) termwindow: (NSInteger)win
 {
   gswindow_device_t *window;
 
@@ -2470,7 +2470,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
     }
 }
 
-- (void) stylewindow: (unsigned int)style : (int) win
+- (void) stylewindow: (NSUInteger)style : (NSInteger)win
 {
   gswindow_device_t	*window;
 
@@ -2513,7 +2513,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
     }
 }
 
-- (void) setbackgroundcolor: (NSColor *)color : (int)win
+- (void) setbackgroundcolor: (NSColor *)color : (NSInteger)win
 {
   XColor xf;
   gswindow_device_t *window;
@@ -2533,7 +2533,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
   XSetWindowBackground(dpy, window->ident, window->xwn_attrs.background_pixel);
 }
 
-- (void) windowbacking: (NSBackingStoreType)type : (int) win
+- (void) windowbacking: (NSBackingStoreType)type : (NSInteger) win
 {
   gswindow_device_t *window;
 
@@ -2613,7 +2613,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
     }
 }
 
-- (void) docedited: (int)edited : (int) win
+- (void) docedited: (NSInteger)edited : (NSInteger)win
 {
   gswindow_device_t *window;
 
@@ -2659,7 +2659,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
   return generic.flags.appOwnsMiniwindow;
 }
 
-- (void) miniwindow: (int) win
+- (void) miniwindow: (NSInteger) win
 {
   gswindow_device_t	*window;
   XEvent e;
@@ -2721,7 +2721,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
    Make sure we have the most up-to-date window information and then
    make sure the context has our new information
 */
-- (void) setWindowdevice: (int)win forContext: (NSGraphicsContext *)ctxt
+- (void) setWindowdevice: (NSInteger)win forContext: (NSGraphicsContext *)ctxt
 {
   unsigned width, height;
   gswindow_device_t *window;
@@ -2731,7 +2731,7 @@ NSLog(@"styleoffsets ... guessing offsets\n");
   window = WINDOW_WITH_TAG(win);
   if (!window)
     {
-      NSLog(@"Invalidparam: Invalid window number %d", win);
+      NSLog(@"Invalidparam: Invalid window number %ld", (long)win);
       return;
     }
 
@@ -2841,7 +2841,7 @@ static BOOL didCreatePixmaps;
   return 1;
 }   
 
-- (void) orderwindow: (int)op : (int)otherWin : (int)winNum
+- (void) orderwindow: (NSInteger)op : (NSInteger)otherWin : (NSInteger)winNum
 {
   gswindow_device_t	*window;
   gswindow_device_t	*other;
@@ -2850,7 +2850,7 @@ static BOOL didCreatePixmaps;
   window = WINDOW_WITH_TAG(winNum);
   if (winNum == 0 || window == NULL)
     {
-      NSLog(@"Invalidparam: Ordering invalid window %d", winNum);
+      NSLog(@"Invalidparam: Ordering invalid window %ld", (long)winNum);
       return;
     }
 
@@ -3104,7 +3104,7 @@ static BOOL didCreatePixmaps;
 /* Restrict the displayed part of the window to the given image.
    This only yields usefull results if the window is borderless and 
    displays the image itself */
-- (void) restrictWindow: (int)win toImage: (NSImage*)image
+- (void) restrictWindow: (NSInteger)win toImage: (NSImage*)image
 {
   gswindow_device_t	*window;
   Pixmap pixmap = 0;
@@ -3112,7 +3112,7 @@ static BOOL didCreatePixmaps;
   window = WINDOW_WITH_TAG(win);
   if (win == 0 || window == NULL)
     {
-      NSLog(@"Invalidparam: Restricting invalid window %d", win);
+      NSLog(@"Invalidparam: Restricting invalid window %ld", (long)win);
       return;
     }
 
@@ -3146,14 +3146,14 @@ static BOOL didCreatePixmaps;
 
 /* This method is a fast implementation of move that only works 
    correctly for borderless windows. Use with caution. */
-- (void) movewindow: (NSPoint)loc : (int)win
+- (void) movewindow: (NSPoint)loc : (NSInteger)win
 {
   gswindow_device_t	*window;
 
   window = WINDOW_WITH_TAG(win);
   if (win == 0 || window == NULL)
     {
-      NSLog(@"Invalidparam: Moving invalid window %d", win);
+      NSLog(@"Invalidparam: Moving invalid window %ld", (long)win);
       return;
     }
 
@@ -3164,7 +3164,7 @@ static BOOL didCreatePixmaps;
   setNormalHints(dpy, window);
 }
 
-- (void) placewindow: (NSRect)rect : (int)win
+- (void) placewindow: (NSRect)rect : (NSInteger)win
 {
   NSEvent *e;
   NSRect xVal;
@@ -3178,7 +3178,7 @@ static BOOL didCreatePixmaps;
   window = WINDOW_WITH_TAG(win);
   if (win == 0 || window == NULL)
     {
-      NSLog(@"Invalidparam: Placing invalid window %d", win);
+      NSLog(@"Invalidparam: Placing invalid window %ld", (long)win);
       return;
     }
 
@@ -3267,13 +3267,13 @@ static BOOL didCreatePixmaps;
     }
 }
 
-- (BOOL) findwindow: (NSPoint)loc : (int) op : (int) otherWin : (NSPoint *)floc 
-: (int*) winFound
+- (BOOL) findwindow: (NSPoint)loc : (NSInteger)op : (NSInteger)otherWin
+                   : (NSPoint *)floc : (NSInteger *)winFound
 {
   return NO;
 }
 
-- (NSRect) windowbounds: (int)win
+- (NSRect) windowbounds: (NSInteger)win
 {
   gswindow_device_t *window;
   int screenHeight;
@@ -3298,7 +3298,7 @@ static BOOL didCreatePixmaps;
   return rect;
 }
 
-- (void) setwindowlevel: (int)level : (int)win
+- (void) setwindowlevel: (NSInteger)level : (NSInteger)win
 {
   gswindow_device_t *window;
 
@@ -3527,7 +3527,7 @@ static BOOL didCreatePixmaps;
   return ret;
 }
 
-- (int) windowdepth: (int)win
+- (NSInteger) windowdepth: (NSInteger)win
 {
   gswindow_device_t *window;
 
@@ -3538,7 +3538,7 @@ static BOOL didCreatePixmaps;
   return window->depth;
 }
 
-- (void) setmaxsize: (NSSize)size : (int)win
+- (void) setmaxsize: (NSSize)size : (NSInteger)win
 {
   gswindow_device_t	*window;
   NSRect		r;
@@ -3556,7 +3556,7 @@ static BOOL didCreatePixmaps;
   setNormalHints(dpy, window);
 }
 
-- (void) setminsize: (NSSize)size : (int)win
+- (void) setminsize: (NSSize)size : (NSInteger)win
 {
   gswindow_device_t	*window;
   NSRect		r;
@@ -3574,7 +3574,7 @@ static BOOL didCreatePixmaps;
   setNormalHints(dpy, window);
 }
 
-- (void) setresizeincrements: (NSSize)size : (int)win
+- (void) setresizeincrements: (NSSize)size : (NSInteger)win
 {
   gswindow_device_t *window;
 
@@ -3590,7 +3590,7 @@ static BOOL didCreatePixmaps;
 }
 
 // process expose event
-- (void) _addExposedRectangle: (XRectangle)rectangle : (int)win : (BOOL) ignoreBacking
+- (void) _addExposedRectangle: (XRectangle)rectangle : (NSInteger)win : (BOOL) ignoreBacking
 {
   gswindow_device_t *window;
 
@@ -3652,7 +3652,7 @@ static BOOL didCreatePixmaps;
     }
 }
 
-- (void) flushwindowrect: (NSRect)rect : (int)win
+- (void) flushwindowrect: (NSRect)rect : (NSInteger)win
 {
   int xi, yi, width, height;
   XGCValues values;
@@ -3663,7 +3663,7 @@ static BOOL didCreatePixmaps;
   window = WINDOW_WITH_TAG(win);
   if (win == 0 || window == NULL)
     {
-      NSLog(@"Invalidparam: Placing invalid window %d", win);
+      NSLog(@"Invalidparam: Placing invalid window %ld", (long)win);
       return;
     }
 
@@ -3774,7 +3774,7 @@ static BOOL didCreatePixmaps;
   XSetClipMask (dpy, window->gc, None);
 }
 
-- (BOOL) capturemouse: (int)win
+- (BOOL) capturemouse: (NSInteger)win
 {
   int ret;
   gswindow_device_t *window;
@@ -3804,7 +3804,7 @@ static BOOL didCreatePixmaps;
   grab_window = NULL;
 }
 
-- (void) setMouseLocation: (NSPoint)mouseLocation onScreen: (int)aScreen
+- (void) setMouseLocation: (NSPoint)mouseLocation onScreen: (NSInteger)aScreen
 {
   int height;
   int destX, destY;
@@ -3817,7 +3817,7 @@ static BOOL didCreatePixmaps;
                0, 0, 0, 0, destX, destY);
 }
 
-- (void) setinputfocus: (int)win
+- (void) setinputfocus: (NSInteger)win
 {
   gswindow_device_t *window = WINDOW_WITH_TAG(win);
 
@@ -3864,7 +3864,7 @@ static BOOL didCreatePixmaps;
  * Instruct window manager that the specified window is 'key', 'main', or
  * just a normal window.
  */
-- (void) setinputstate: (int)st : (int)win
+- (void) setinputstate: (NSInteger)st : (NSInteger)win
 {
   if (!handlesWindowDecorations)
     return;
@@ -3923,7 +3923,7 @@ static BOOL didCreatePixmaps;
 }
 
 /** Sets the transparancy value for the whole window */
-- (void) setalpha: (float)alpha : (int) win
+- (void) setalpha: (CGFloat)alpha : (NSInteger) win
 {
   gswindow_device_t *window = WINDOW_WITH_TAG(win);
   static Atom opacity_atom = None;
@@ -3964,7 +3964,7 @@ static BOOL didCreatePixmaps;
     }
 }
 
-- (float) getAlpha: (int)win
+- (CGFloat) getAlpha: (NSInteger)win
 {
   gswindow_device_t *window = WINDOW_WITH_TAG(win);
   static Atom opacity_atom = None;
@@ -4001,7 +4001,7 @@ static BOOL didCreatePixmaps;
   return dpy;
 }
 
-- (void *) windowDevice: (int)win
+- (void *) windowDevice: (NSInteger)win
 {
   Window ptrloc;
   gswindow_device_t *window;
@@ -4254,7 +4254,7 @@ xgps_cursor_image(Display *xdpy, Drawable draw, const unsigned char *data,
   cursor_hidden = NO;
 }
 
-- (void) standardcursor: (int)style : (void **)cid
+- (void) standardcursor: (NSInteger)style : (void **)cid
 {
   Cursor cursor = None;
 
@@ -4545,12 +4545,12 @@ _computeDepth(int class, int bpp)
  return screens;
 }
 
-- (NSWindowDepth) windowDepthForScreen: (int) screen_num
+- (NSWindowDepth) windowDepthForScreen: (NSInteger) screen_num
 { 
   Screen	*screen;
   int		 class = 0, bpp = 0;
 
-  screen = XScreenOfDisplay(dpy, screen_num);
+  screen = XScreenOfDisplay(dpy, (int)screen_num);
   if (screen == NULL)
     {
       return 0;
@@ -4562,7 +4562,7 @@ _computeDepth(int class, int bpp)
   return _computeDepth(class, bpp);
 }
 
-- (const NSWindowDepth *) availableDepthsForScreen: (int) screen_num
+- (const NSWindowDepth *) availableDepthsForScreen: (NSInteger) screen_num
 {  
   Screen	*screen;
   int		 class = 0;
@@ -4576,7 +4576,7 @@ _computeDepth(int class, int bpp)
       return NULL;
     }
 
-  screen = XScreenOfDisplay(dpy, screen_num);
+  screen = XScreenOfDisplay(dpy, (int)screen_num);
   if (screen == NULL)
     {
       return NULL;
@@ -4596,7 +4596,7 @@ _computeDepth(int class, int bpp)
   return depths;
 }
 
-- (NSSize) resolutionForScreen: (int)screen_num
+- (NSSize) resolutionForScreen: (NSInteger)screen_num
 { 
   // NOTE:
   // -gui now trusts the return value of resolutionForScreen:,
@@ -4629,11 +4629,11 @@ _computeDepth(int class, int bpp)
   */
 }
 
-- (NSRect) boundsForScreen: (int)screen
+- (NSRect) boundsForScreen: (NSInteger)screen
 {
  if (screen < 0 || screen >= ScreenCount(dpy))
    {
-     NSLog(@"Invalidparam: no screen %d", screen);
+     NSLog(@"Invalidparam: no screen %ld", (long)screen);
      return NSZeroRect;
    }
  return NSMakeRect(0, 0, DisplayWidth(dpy, screen), 
@@ -4731,7 +4731,7 @@ _computeDepth(int class, int bpp)
   return [super iconSize];
 }
 
-- (unsigned int) numberOfDesktops: (int)screen
+- (NSUInteger) numberOfDesktops: (NSInteger)screen
 {
   static Atom number_of_desktops = None;
   NSUInteger c;
@@ -4753,7 +4753,7 @@ _computeDepth(int class, int bpp)
   return number;
 }
 
-- (NSArray *) namesOfDesktops: (int)screen
+- (NSArray *) namesOfDesktops: (NSInteger)screen
 {
   static Atom utf8_string = None;
   static Atom desktop_names = None;
@@ -4786,7 +4786,7 @@ _computeDepth(int class, int bpp)
   return nil;
 }
 
-- (unsigned int) desktopNumberForScreen: (int)screen
+- (NSUInteger) desktopNumberForScreen: (NSInteger)screen
 {
   static Atom current_desktop = None;
   NSUInteger c;
@@ -4808,7 +4808,7 @@ _computeDepth(int class, int bpp)
   return number;
 }
 
-- (void) setDesktopNumber: (unsigned int)workspace forScreen: (int)screen
+- (void) setDesktopNumber: (NSUInteger)workspace forScreen: (NSInteger)screen
 {
   static Atom current_desktop = None;
   Window root = RootWindow(dpy, screen);
@@ -4825,7 +4825,7 @@ _computeDepth(int class, int bpp)
         data3: 0];
 }
 
-- (unsigned int) desktopNumberForWindow: (int)win
+- (NSUInteger) desktopNumberForWindow: (NSInteger)win
 {
   gswindow_device_t	*window;
   static Atom wm_desktop = None;
@@ -4852,7 +4852,7 @@ _computeDepth(int class, int bpp)
   return number;
 }
 
-- (void) setDesktopNumber: (unsigned int)workspace forWindow: (int)win
+- (void) setDesktopNumber: (NSUInteger)workspace forWindow: (NSInteger)win
 {
   gswindow_device_t	*window;
   static Atom wm_desktop = None;
@@ -4873,7 +4873,7 @@ _computeDepth(int class, int bpp)
         data3: 0];
 }
 
-- (void) setShadow: (BOOL)hasShadow : (int)win
+- (void) setShadow: (BOOL)hasShadow : (NSInteger)win
 {
   gswindow_device_t	*window;
   static Atom wm_window_shadow = None;
@@ -4994,8 +4994,8 @@ _computeDepth(int class, int bpp)
   return NO;
 }
 
-- (void) setParentWindow: (int)parentWin 
-          forChildWindow: (int)childWin
+- (void) setParentWindow: (NSInteger)parentWin 
+          forChildWindow: (NSInteger)childWin
 {
   gswindow_device_t	*cwindow;
   gswindow_device_t	*pwindow;
